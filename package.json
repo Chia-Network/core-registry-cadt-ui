@@ -1,5 +1,5 @@
 {
-  "name": "cadt-ui",
+  "name": "core-registry-cadt-ui",
   "version": "1.2.4",
   "private": true,
   "author": "Chia Network Inc. <hello@chia.net>",
@@ -102,7 +102,7 @@
   },
   "build": {
     "appId": "org.worldbank.climate-action-data-trust",
-    "productName": "cadt-ui",
+    "productName": "core-registry-cadt-ui",
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -127,9 +127,9 @@
     },
     "linux": {
       "target": "deb",
-      "description": "Climate Action Data Trust user interface desktop application. Allows point-and-click interface for the CADT API application.",
+      "description": "Core Registry Climate Action Data Trust user interface desktop application. Allows point-and-click interface for the Core Registry CADT API application.",
       "maintainer": "Chia Network Inc <hello@chia.net>",
-      "vendor": "https://climateactiondata.org/",
+      "vendor": "https://www.chia.net/",
       "publish": null,
       "icon": "src/assets/img/CADT_Icon.png",
       "desktop": {
