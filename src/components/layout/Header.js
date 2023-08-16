@@ -57,7 +57,7 @@ const Header = () => {
             </Body>
           )}
         </HomeOrgUidContainer>
-        <MyAccount />
+        {window.self === window.top && <MyAccount />}
         <LocaleSwitcher />
       </StyledLocalContainer>
     </Headline>

@@ -46,7 +46,7 @@ const AppNavigator = () => {
   return (
     <AppContainer>
       {showProgressOverlay && <IndeterminateProgressOverlay />}
-      {!connectionCheck ? (
+      {!connectionCheck && window.self === window.top ? (
         <MyAccount
           openModal={true}
           onClose={() => dispatch(getOrganizationData())}
