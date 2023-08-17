@@ -33,14 +33,15 @@ curl -sL https://repo.chia.net/FD39E6D3.pubkey.asc | sudo gpg --dearmor -o /usr/
 3. Use the following command to setup the repository.
 
 ```
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/chia.gpg] https://repo.chia.net/cadt/debian/ stable main" | sudo tee /etc/apt/sources.list.d/cadt.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/chia.gpg] https://repo.chia.net/climate-tokenization/debian/ stable main" | sudo tee /etc/apt/sources.list.d/climate-tokenization.list > /dev/null
+
 ```
 
-4.  Install CADT-UI
+4.  Install Core Registry CADT-UI
 
 ```
 sudo apt-get update
-sudo apt-get install cadt-ui
+sudo apt-get install core-registry-cadt-ui
 ```
 
 
