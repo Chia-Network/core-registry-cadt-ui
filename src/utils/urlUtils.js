@@ -16,7 +16,7 @@ export const validateUrl = url => {
 };
 
 export const overrideURL = originalUrl => {
-  const serverAddress = localStorage.getItem('serverAddress');
+  const serverAddress = localStorage.getItem('cadtRemoteServerAddress');
 
   // If serverAddress is valid, replace the domain of the original URL.
   if (serverAddress && typeof serverAddress === 'string') {
