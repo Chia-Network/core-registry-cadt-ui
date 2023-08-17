@@ -2539,7 +2539,7 @@ export const getVintages = options => {
 
 // TODO to replace with an extended wrapper that also adds try catch finally and also handles network connection and progress indicator dispatches
 const fetchWrapper = async (url, payload) => {
-  const apiKey = localStorage.getItem('apiKey');
+  const apiKey = localStorage.getItem('cadtRemoteServerApiKey');
 
   url = overrideURL(url);
 
