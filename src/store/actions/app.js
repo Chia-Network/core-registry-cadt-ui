@@ -129,11 +129,11 @@ export const setNotificationMessage = (type, id) => {
 export const signIn = ({ apiKey, serverAddress }) => {
   return async dispatch => {
     if (serverAddress) {
-      localStorage.setItem('serverAddress', serverAddress);
+      localStorage.setItem('cadtRemoteServerAddress', serverAddress);
       let payload = { serverAddress };
 
       if (apiKey) {
-        localStorage.setItem('apiKey', apiKey);
+        localStorage.setItem('cadtRemoteServerApiKey', apiKey);
         payload = { ...payload, apiKey };
       }
 
@@ -149,8 +149,8 @@ export const signIn = ({ apiKey, serverAddress }) => {
 
 export const signOut = () => {
   return async dispatch => {
-    localStorage.removeItem('apiKey');
-    localStorage.removeItem('serverAddress');
+    localStorage.removeItem('cadtRemoteServerApiKey');
+    localStorage.removeItem('cadtRemoteServerAddress');
     dispatch({
       type: actions.SIGN_USER_OUT,
       payload: {
@@ -163,8 +163,8 @@ export const signOut = () => {
 
 export const signInFromLocalStorage = () => {
   return async dispatch => {
-    const apiKey = localStorage.getItem('apiKey');
-    const serverAddress = localStorage.getItem('serverAddress');
+    const apiKey = localStorage.getItem('cadtRemoteServerApiKey');
+    const serverAddress = localStorage.getItem('cadtRemoteServerAddress');
 
     if (serverAddress) {
       let payload = { serverAddress };
