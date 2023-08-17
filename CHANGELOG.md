@@ -1,3 +1,61 @@
+## [1.2.4](https://github.com/Chia-Network/cadt-ui/compare/1.2.3...1.2.4) (2023-08-08)
+
+
+### Bug Fixes
+
+* remove yarn lock ([6242016](https://github.com/Chia-Network/cadt-ui/commit/62420167c38432d90e76ecad39c7db13d528a374))
+* url override for connect functionality ([4d35f78](https://github.com/Chia-Network/cadt-ui/commit/4d35f780b8889ba2d1eb17164ee92c727f36dd2c))
+
+
+
+## [1.2.3](https://github.com/Chia-Network/cadt-ui/compare/1.2.2...1.2.3) (2023-06-29)
+
+
+### Bug Fixes
+
+* year select ([96edbd2](https://github.com/Chia-Network/cadt-ui/commit/96edbd2b2d223ea4896d3f6a269d9292704bc3e4))
+
+
+
+## [1.2.2](https://github.com/Chia-Network/cadt-ui/compare/1.2.1...1.2.2) (2023-06-29)
+
+
+
+## [1.2.1](https://github.com/Chia-Network/cadt-ui/compare/1.2.0...1.2.1) (2023-06-29)
+
+
+
+# [1.2.0](https://github.com/Chia-Network/cadt-ui/compare/1.1.3...1.2.0) (2023-06-09)
+
+
+
+## [1.1.3](https://github.com/Chia-Network/cadt-ui/compare/1.1.2...1.1.3) (2023-06-06)
+
+
+### Bug Fixes
+
+* swap out server override if present when downloading xls ([55e0b86](https://github.com/Chia-Network/cadt-ui/commit/55e0b8679b42d58a42f5db85218c12b66cb58967))
+
+
+
+## [1.1.2](https://github.com/Chia-Network/cadt-ui/compare/1.1.1...1.1.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* dont close model when click out of modal ([7818a7a](https://github.com/Chia-Network/cadt-ui/commit/7818a7a72c33072a177c7abcef8ac512c6f3ff8f))
+
+
+
+## [1.1.1](https://github.com/Chia-Network/cadt-ui/compare/1.1.0...1.1.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* restore previous versions of dependencies ([9a90224](https://github.com/Chia-Network/cadt-ui/commit/9a9022439ff3c1d113b84e995a3aa09d1eb9d0e3))
+
+
+
 # [1.1.0](https://github.com/Chia-Network/cadt-ui/compare/1.0.20...1.1.0) (2023-05-09)
 
 
