@@ -8,8 +8,6 @@ export const unitsSchema = yup.object().shape({
     .string()
     .required('yup-validation-field-required'),
   inCountryJurisdictionOfOwner: yup.string().optional(),
-  unitBlockEnd: yup.string().required('yup-validation-field-required'),
-  unitBlockStart: yup.string().required('yup-validation-field-required'),
   unitCount: yup
     .number()
     .positive('yup-validation-positive-number')
@@ -53,14 +51,6 @@ export const splitUnitsValidationSchema = yup.object().shape({
       unitOwner: yup
         .string()
         .optional()
-        .typeError('yup-validation-valid-string'),
-      unitBlockStart: yup
-        .string()
-        .required('yup-validation-field-required')
-        .typeError('yup-validation-valid-string'),
-      unitBlockEnd: yup
-        .string()
-        .required('yup-validation-field-required')
         .typeError('yup-validation-valid-string'),
       countryJurisdictionOfOwner: yup
         .string()

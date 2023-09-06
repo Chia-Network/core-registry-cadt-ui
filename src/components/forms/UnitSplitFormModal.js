@@ -29,8 +29,6 @@ const UnitSplitFormModal = ({ onClose, record }) => {
       unitOwner: '',
       countryJurisdictionOfOwner: '',
       inCountryJurisdictionOfOwner: '',
-      unitBlockStart: '',
-      unitBlockEnd: '',
     }),
     [],
   );
@@ -65,8 +63,6 @@ const UnitSplitFormModal = ({ onClose, record }) => {
           records: values.units.map(splittedUnit => {
             const newUnit = {};
             newUnit.unitCount = splittedUnit.unitCount;
-            newUnit.unitBlockStart = splittedUnit.unitBlockStart;
-            newUnit.unitBlockEnd = splittedUnit.unitBlockEnd;
 
             if (splittedUnit.unitOwner !== '') {
               newUnit.unitOwner = splittedUnit.unitOwner;

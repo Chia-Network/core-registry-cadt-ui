@@ -134,6 +134,11 @@ const UnitEditModal = ({ onClose, record, modalSizeAndPosition }) => {
         if (dataToSend.serialNumberBlock) {
           delete dataToSend.serialNumberBlock;
         }
+
+        delete dataToSend.unitCount;
+        delete dataToSend.unitBlockEnd;
+        delete dataToSend.unitBlockStart;
+
         cleanObjectFromEmptyFieldsOrArrays(dataToSend);
         dispatch(updateUnitsRecord(dataToSend));
       }}
@@ -188,7 +193,7 @@ const UnitEditModal = ({ onClose, record, modalSizeAndPosition }) => {
                 value={tabValue}
                 index={0}
               >
-                <UnitDetailsForm />
+                <UnitDetailsForm noUnitCount={true} />
               </TabPanel>
               <TabPanel value={tabValue} index={1}>
                 <UnitIssuanceForm />
