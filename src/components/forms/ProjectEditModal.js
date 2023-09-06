@@ -42,7 +42,7 @@ const ProjectEditModal = ({
 }) => {
   const projectToBeEdited = useSelector(
     state =>
-      state.climateWarehouse.projects.filter(
+      state?.climateWarehouse?.projects?.filter(
         project => project.warehouseProjectId === record.warehouseProjectId,
       )[0],
   );

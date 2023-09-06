@@ -102,8 +102,7 @@ const UnitsDetails = ({ data, stagingData, changeColor }) => {
             <Body size="Bold" width="100%">
               <FormattedMessage id="unit-block-start" />
             </Body>
-            {data &&
-              detailsViewData('data', data, 'unitBlockStart', changeColor)}
+            {data && detailsViewData('data', data, 'unitBlockStart', false)}
             {stagingData &&
               detailsViewData(
                 'stagingData',

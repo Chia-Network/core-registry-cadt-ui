@@ -36,7 +36,10 @@ const InnerContainer = styled('div')`
 const Dashboard = withTheme(({ children }) => {
   return (
     <Main>
-      {window.self === window.top && <Header />}
+      <div style={{ display: window.self === window.top ? 'block' : 'none' }}>
+        <Header />
+      </div>
+
       <InnerContainer>
         <ErrorBoundary>
           <LeftNav />

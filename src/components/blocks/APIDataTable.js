@@ -170,7 +170,7 @@ const APIDataTable = withTheme(
         let fullRecord = null;
 
         if (actions === 'Projects') {
-          fullRecord = projects.filter(
+          fullRecord = projects?.filter(
             project =>
               project.warehouseProjectId === partialRecord.warehouseProjectId,
           )[0];

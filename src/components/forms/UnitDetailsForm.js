@@ -36,7 +36,7 @@ import {
   SimpleSelectStateEnum,
 } from '..';
 
-const UnitDetailsForm = () => {
+const UnitDetailsForm = ({ noUnitCount = false }) => {
   const intl = useIntl();
   const { pickLists, myProjects, issuances } = useSelector(
     store => store.climateWarehouse,
@@ -155,7 +155,8 @@ const UnitDetailsForm = () => {
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'select-existing-project',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -211,7 +212,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-project-location-id-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -249,7 +251,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-unit-owner-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -274,108 +277,44 @@ const UnitDetailsForm = () => {
             </InputContainer>
             <FormikError name="unitOwner" />
           </StyledFieldContainer>
-          <StyledFieldContainer>
-            <StyledLabelContainer>
-              <Body>
-                <LabelContainer>
-                  *<FormattedMessage id="unit-block-start" />
-                </LabelContainer>
-                <ToolTipContainer
-                  tooltip={intl.formatMessage({
-                    id: 'units-unit-block-start-description',
-                  })}>
-                  <DescriptionIcon height="14" width="14" />
-                </ToolTipContainer>
-              </Body>
-            </StyledLabelContainer>
-            <InputContainer>
-              <StandardInput
-                variant={
-                  errors.unitBlockStart && touched.unitBlockStart
-                    ? InputVariantEnum.error
-                    : undefined
-                }
-                size={InputSizeEnum.large}
-                placeholderText={intl.formatMessage({
-                  id: 'unit-block-start',
-                })}
-                state={InputStateEnum.default}
-                value={values.unitBlockStart}
-                onChange={value => setFieldValue('unitBlockStart', value)}
-                onBlur={handleBlur}
-                name="unitBlockStart"
-              />
-            </InputContainer>
-            <FormikError name="unitBlockStart" />
-          </StyledFieldContainer>
-          <StyledFieldContainer>
-            <StyledLabelContainer>
-              <Body>
-                <LabelContainer>
-                  *<FormattedMessage id="unit-block-end" />
-                </LabelContainer>
-                <ToolTipContainer
-                  tooltip={intl.formatMessage({
-                    id: 'units-unit-block-end-description',
-                  })}>
-                  <DescriptionIcon height="14" width="14" />
-                </ToolTipContainer>
-              </Body>
-            </StyledLabelContainer>
-            <InputContainer>
-              <StandardInput
-                variant={
-                  errors.unitBlockEnd && touched.unitBlockEnd
-                    ? InputVariantEnum.error
-                    : undefined
-                }
-                size={InputSizeEnum.large}
-                placeholderText={intl.formatMessage({
-                  id: 'unit-block-end',
-                })}
-                state={InputStateEnum.default}
-                value={values.unitBlockEnd}
-                onChange={value => setFieldValue('unitBlockEnd', value)}
-                onBlur={handleBlur}
-                name="unitBlockEnd"
-              />
-            </InputContainer>
-            <FormikError name="unitBlockEnd" />
-          </StyledFieldContainer>
-          <StyledFieldContainer>
-            <StyledLabelContainer>
-              <Body>
-                <LabelContainer>
-                  *<FormattedMessage id="unit-count" />
-                </LabelContainer>
-                <ToolTipContainer
-                  tooltip={intl.formatMessage({
-                    id: 'units-unit-count-description',
-                  })}>
-                  <DescriptionIcon height="14" width="14" />
-                </ToolTipContainer>
-              </Body>
-            </StyledLabelContainer>
-            <InputContainer>
-              <StandardInput
-                variant={
-                  errors.unitCount && touched.unitCount
-                    ? InputVariantEnum.error
-                    : undefined
-                }
-                size={InputSizeEnum.large}
-                placeholderText={intl.formatMessage({
-                  id: 'unit-count',
-                })}
-                state={InputStateEnum.default}
-                value={values.unitCount}
-                onChange={value => setFieldValue('unitCount', value)}
-                onBlur={handleBlur}
-                name="unitCount"
-              />
-            </InputContainer>
-            <FormikError name="unitCount" />
-          </StyledFieldContainer>
+          {!noUnitCount && (
+            <StyledFieldContainer>
+              <StyledLabelContainer>
+                <Body>
+                  <LabelContainer>
+                    *<FormattedMessage id="unit-count" />
+                  </LabelContainer>
+                  <ToolTipContainer
+                    tooltip={intl.formatMessage({
+                      id: 'units-unit-count-description',
+                    })}
+                  >
+                    <DescriptionIcon height="14" width="14" />
+                  </ToolTipContainer>
+                </Body>
+              </StyledLabelContainer>
+              <InputContainer>
+                <StandardInput
+                  variant={
+                    errors.unitCount && touched.unitCount
+                      ? InputVariantEnum.error
+                      : undefined
+                  }
+                  size={InputSizeEnum.large}
+                  placeholderText={intl.formatMessage({
+                    id: 'unit-count',
+                  })}
+                  state={InputStateEnum.default}
+                  value={values.unitCount}
+                  onChange={value => setFieldValue('unitCount', value)}
+                  onBlur={handleBlur}
+                  name="unitCount"
+                />
+              </InputContainer>
+              <FormikError name="unitCount" />
+            </StyledFieldContainer>
+          )}
+
           <StyledFieldContainer>
             <StyledLabelContainer>
               <Body>
@@ -385,7 +324,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-in-country-jurisdiction-of-owner-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -422,7 +362,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-country-jurisdiction-of-owner-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -453,7 +394,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-unit-type-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -482,7 +424,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-unit-status-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -512,7 +455,8 @@ const UnitDetailsForm = () => {
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'units-unit-status-reason-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -546,7 +490,8 @@ const UnitDetailsForm = () => {
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'units-unit-registry-link-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -579,7 +524,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-vintage-year-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -612,7 +558,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-marketplace-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -646,7 +593,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-marketplace-identifier-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -683,7 +631,8 @@ const UnitDetailsForm = () => {
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'units-marketplace-link-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -717,7 +666,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-corresponding-adjustment-declaration-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -748,7 +698,8 @@ const UnitDetailsForm = () => {
                 <ToolTipContainer
                   tooltip={intl.formatMessage({
                     id: 'units-corresponding-adjustment-status-description',
-                  })}>
+                  })}
+                >
                   <DescriptionIcon height="14" width="14" />
                 </ToolTipContainer>
               </Body>
@@ -783,7 +734,8 @@ const UnitDetailsForm = () => {
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'units-unit-tags-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
