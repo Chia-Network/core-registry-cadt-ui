@@ -100,6 +100,59 @@ const UnitsDetails = ({ data, stagingData, changeColor }) => {
           </StyledItem>
           <StyledItem>
             <Body size="Bold" width="100%">
+              <FormattedMessage id="unit-block-start" />
+            </Body>
+            {data && detailsViewData('data', data, 'unitBlockStart', false)}
+            {stagingData &&
+              detailsViewData(
+                'stagingData',
+                stagingData,
+                'unitBlockStart',
+                changeColor,
+              )}
+          </StyledItem>
+          <StyledItem>
+            <Body size="Bold" width="100%">
+              <FormattedMessage id="unit-block-end" />
+            </Body>
+            {data && detailsViewData('data', data, 'unitBlockEnd', changeColor)}
+            {stagingData &&
+              detailsViewData(
+                'stagingData',
+                stagingData,
+                'unitBlockEnd',
+                changeColor,
+              )}
+          </StyledItem>
+          <StyledItem>
+            <Body size="Bold" width="100%">
+              <FormattedMessage id="unit-count" />
+            </Body>
+            {data && detailsViewData('data', data, 'unitCount', changeColor)}
+            {stagingData &&
+              detailsViewData(
+                'stagingData',
+                stagingData,
+                'unitCount',
+                changeColor,
+              )}
+          </StyledItem>
+          <StyledItem>
+            <Body size="Bold" width="100%">
+              <FormattedMessage id="serial-number-block" />
+            </Body>
+            {data &&
+              detailsViewData('data', data, 'serialNumberBlock', changeColor)}
+            {stagingData &&
+              detailsViewData(
+                'stagingData',
+                stagingData,
+                'serialNumberBlock',
+                changeColor,
+              )}
+          </StyledItem>
+          <StyledItem>
+            <Body size="Bold" width="100%">
               <FormattedMessage id="country-jurisdiction-of-owner" />
             </Body>
             {data &&
