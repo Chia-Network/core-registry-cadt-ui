@@ -1,3 +1,18 @@
+## [1.2.8](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.6...1.2.8) (2023-09-07)
+
+
+### Bug Fixes
+
+* coloring for diff ([7eb9e35](https://github.com/Chia-Network/core-registry-cadt-ui/commit/7eb9e351222eac6f73a2018729b75894f820f2b0))
+
+
+### Features
+
+* additional prefix support ([faadf88](https://github.com/Chia-Network/core-registry-cadt-ui/commit/faadf88d110321a9ec5e21f24fa4d2da46e210a5))
+* handle auto serial number ([ae5da14](https://github.com/Chia-Network/core-registry-cadt-ui/commit/ae5da14ce2872c7336320ab9ec725bbdbc1c9086))
+
+
+
 ## [1.2.6](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.5...1.2.6) (2023-08-17)
 
 
