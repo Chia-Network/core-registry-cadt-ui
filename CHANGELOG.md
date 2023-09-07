@@ -1,3 +1,12 @@
+## [1.2.11](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.10...1.2.11) (2023-09-07)
+
+
+### Bug Fixes
+
+* various race conditions ([fde9b4b](https://github.com/Chia-Network/core-registry-cadt-ui/commit/fde9b4be81efa90dd68e73f9aaeb091ded129f98))
+
+
+
 ## [1.2.10](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.8...1.2.10) (2023-09-07)
 
 
