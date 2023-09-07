@@ -314,8 +314,12 @@ const stagingDetailsViewLinkInfo = (info, dataType, changeColor) => {
 };
 
 export const detailsViewData = (type, detailData, dataType, changeColor) => {
-  //all detail view data corresponding to dates
+  if (detailData[dataType].changes[0] === null) {
+    return <Body>{'---'}</Body>;
+  }
+
   if (type === 'data' && dataType.toLowerCase().includes('date')) {
+    //all detail view data corresponding to dates
     return (
       <Body>
         {detailData[dataType] ? getISODate(detailData[dataType]) : '---'}

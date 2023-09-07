@@ -38,8 +38,6 @@ const emptyUnit = {
   countryJurisdictionOfOwner: '',
   inCountryJurisdictionOfOwner: '',
   unitCount: 0,
-  unitBlockEnd: '',
-  unitBlockStart: '',
   marketplace: '',
   marketplaceLink: '',
   marketplaceIdentifier: '',

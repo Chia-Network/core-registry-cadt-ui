@@ -17,12 +17,13 @@ import {
 } from '..';
 import { editExistingOrg } from '../../store/actions/climateWarehouseActions';
 
-const OrgEditFormModal = ({ onClose, name, icon }) => {
+const OrgEditFormModal = ({ onClose, name, prefix, icon }) => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const { notification } = useSelector(state => state.app);
   const [formData, setFormData] = useState({
     name,
+    prefix,
     png: icon,
   });
 
@@ -77,6 +78,33 @@ const OrgEditFormModal = ({ onClose, name, icon }) => {
                 <Body size="Small" color="red">
                   {intl.formatMessage({
                     id: 'add-valid-organization-name',
+                  })}
+                </Body>
+              )}
+            </StyledFieldContainer>
+            <StyledFieldContainer>
+              <StyledLabelContainer>
+                <Body>
+                  *<FormattedMessage id="organization-prefix" />
+                </Body>
+              </StyledLabelContainer>
+              <InputContainer>
+                <StandardInput
+                  size={InputSizeEnum.large}
+                  variant={InputVariantEnum.default}
+                  value={formData.prefix}
+                  onChange={value =>
+                    setFormData(prevState => ({
+                      ...prevState,
+                      prefix: value,
+                    }))
+                  }
+                />
+              </InputContainer>
+              {!nameIsValid && (
+                <Body size="Small" color="red">
+                  {intl.formatMessage({
+                    id: 'add-valid-organization-prefix',
                   })}
                 </Body>
               )}

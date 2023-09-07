@@ -42,7 +42,7 @@ const ProjectTransferModal = ({
 }) => {
   const projectToBeTransferred = useSelector(
     state =>
-      state.climateWarehouse.projects.filter(
+      state?.climateWarehouse?.projects?.filter(
         project => project.warehouseProjectId === record.warehouseProjectId,
       )[0],
   );
