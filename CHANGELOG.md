@@ -1,3 +1,12 @@
+## [1.2.10](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.8...1.2.10) (2023-09-07)
+
+
+### Bug Fixes
+
+* changes ([3fb6c47](https://github.com/Chia-Network/core-registry-cadt-ui/commit/3fb6c47851337a77e10492157ca7a45dacae2dd5))
+
+
+
 ## [1.2.8](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.6...1.2.8) (2023-09-07)
 
 
