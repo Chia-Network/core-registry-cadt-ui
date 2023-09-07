@@ -88,10 +88,21 @@ const getClimateWarehouseTable = (
           dispatch(setConnectionCheck(true));
           const results = await response.json();
 
-          dispatch({
-            type: action,
-            payload: results,
-          });
+          if (
+            typeof results === 'object' &&
+            results !== null &&
+            'data' in results
+          ) {
+            dispatch({
+              type: action,
+              payload: results.data,
+            });
+          } else {
+            dispatch({
+              type: action,
+              payload: results,
+            });
+          }
         }
       }
     } catch (error) {

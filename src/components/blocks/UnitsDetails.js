@@ -31,7 +31,7 @@ const UnitsDetails = ({ data, stagingData, changeColor }) => {
 
   const unitBelongsToProjectName =
     data &&
-    projects?.filter(
+    projects.filter(
       projectItem => projectItem.warehouseProjectId === unitBelongsToProjectId,
     )[0]?.projectName;
 

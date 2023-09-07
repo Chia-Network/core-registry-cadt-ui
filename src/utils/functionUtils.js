@@ -314,7 +314,7 @@ const stagingDetailsViewLinkInfo = (info, dataType, changeColor) => {
 };
 
 export const detailsViewData = (type, detailData, dataType, changeColor) => {
-  if (detailData[dataType]?.changes[0] === null) {
+  if (detailData[dataType]?.changes?.[0] === null) {
     return <Body>{'---'}</Body>;
   }
 
