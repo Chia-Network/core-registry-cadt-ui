@@ -64,8 +64,6 @@ const UnitsDetailViewModal = ({
     return null;
   }
 
-  console.log('@@@@@@@@@@@@@@@2', projects);
-
   return (
     <Modal
       modalSizeAndPosition={modalSizeAndPosition}
