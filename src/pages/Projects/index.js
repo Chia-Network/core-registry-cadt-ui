@@ -18,6 +18,10 @@ import {
   addIsMakerPropToChangeGroups,
   convertProcessedOfferToStagingChangeGroups,
 } from '../../utils/transferOfferUtils';
+import {
+  getIssuances,
+  getProjects,
+} from '../../store/actions/climateWarehouseActions';
 
 import {
   APIDataTable,
@@ -322,6 +326,8 @@ const Projects = withTheme(({ theme }) => {
       return null;
     }
 
+    console.log('projects', projects);
+
     return projects.map(project =>
       _.pick(project, [
         'warehouseProjectId',
@@ -376,6 +382,11 @@ const Projects = withTheme(({ theme }) => {
     () => [...pendingMakerOfferChangeGroups, ...pendingTakerOfferChangeGroups],
     [stagingData],
   );
+
+  useEffect(() => {
+    dispatch(getIssuances());
+    dispatch(getProjects({ useMockedResponse: false, useApiMock: false }));
+  }, []);
 
   if (!filteredColumnsTableData) {
     return null;

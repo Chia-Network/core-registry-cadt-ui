@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import { Tab, Tabs, TabPanel, Modal, modalTypeEnum } from '..';
@@ -53,11 +53,18 @@ const UnitsDetailViewModal = ({
     ],
     item => item,
   );
+  const { projects } = useSelector(store => store.climateWarehouse);
 
   useEffect(() => {
     dispatch(getIssuances());
     dispatch(getProjects({ useMockedResponse: false, useApiMock: false }));
   }, []);
+
+  if (!projects) {
+    return null;
+  }
+
+  console.log('@@@@@@@@@@@@@@@2', projects);
 
   return (
     <Modal
@@ -88,7 +95,8 @@ const UnitsDetailViewModal = ({
                 key={labelValue.id}
                 noHeight
                 value={tabValue}
-                index={!_.isEmpty(unitsTabs) ? 2 - unitsTabs.length : 2}>
+                index={!_.isEmpty(unitsTabs) ? 2 - unitsTabs.length : 2}
+              >
                 <UnitsLabelsDetails data={labelValue} />
               </TabPanel>
             ))}

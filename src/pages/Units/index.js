@@ -14,6 +14,10 @@ import { downloadTxtFile } from '../../utils/xlsxUtils';
 import constants from '../../constants';
 import { getUpdatedUrl } from '../../utils/urlUtils';
 import { useWindowSize } from '../../components/hooks/useWindowSize';
+import {
+  getIssuances,
+  getProjects,
+} from '../../store/actions/climateWarehouseActions';
 
 import {
   deleteStagingData,
@@ -192,6 +196,11 @@ const Units = withTheme(({ theme }) => {
   useEffect(() => {
     setTabValue(0);
   }, [searchParams.get('orgUid')]);
+
+  useEffect(() => {
+    dispatch(getIssuances());
+    dispatch(getProjects({ useMockedResponse: false, useApiMock: false }));
+  }, []);
 
   useEffect(() => {
     if (unitsContainerRef && unitsContainerRef.current) {
