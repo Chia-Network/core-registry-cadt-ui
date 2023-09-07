@@ -1847,6 +1847,7 @@ export const postNewOrg = data => {
       const formData = new FormData();
       formData.append('file', data.png);
       formData.append('name', data.name);
+      formData.append('prefix', data.prefix);
 
       const url = `${constants.API_HOST}/organizations/create`;
       const payload = {
@@ -1896,6 +1897,7 @@ export const editExistingOrg = data => {
       const formData = new FormData();
       formData.append('file', data.png);
       formData.append('name', data.name);
+      formData.append('prefix', data.prefix);
 
       const url = `${constants.API_HOST}/organizations/edit`;
       const payload = {

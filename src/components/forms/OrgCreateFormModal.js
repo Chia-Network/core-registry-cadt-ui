@@ -40,11 +40,13 @@ const OrgCreateFormModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     png: null,
+    prefix: '',
   });
   const [importedOrgUid, setImportedOrgUid] = useState('');
   const [tabValue, setTabValue] = useState(0);
 
   const nameIsValid = formData?.name?.length > 0;
+  const prefixIsValid = formData?.prefix?.length > 0;
   const isOrgUidValid = importedOrgUid?.length > 4;
 
   const handleTabChange = (event, newValue) => {
@@ -109,6 +111,33 @@ const OrgCreateFormModal = ({ onClose }) => {
                   <Body size="Small" color="red">
                     {intl.formatMessage({
                       id: 'add-valid-organization-name',
+                    })}
+                  </Body>
+                )}
+              </StyledFieldContainer>
+              <StyledFieldContainer>
+                <StyledLabelContainer>
+                  <Body>
+                    *<FormattedMessage id="organization-prefix" />
+                  </Body>
+                </StyledLabelContainer>
+                <InputContainer>
+                  <StandardInput
+                    size={InputSizeEnum.large}
+                    variant={InputVariantEnum.default}
+                    value={formData.prefix}
+                    onChange={value =>
+                      setFormData(prevState => ({
+                        ...prevState,
+                        prefix: value,
+                      }))
+                    }
+                  />
+                </InputContainer>
+                {!prefixIsValid && (
+                  <Body size="Small" color="red">
+                    {intl.formatMessage({
+                      id: 'add-valid-organization-prefix',
                     })}
                   </Body>
                 )}

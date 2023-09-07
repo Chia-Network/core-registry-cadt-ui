@@ -3,6 +3,7 @@ import { validateUrl } from '../../utils/urlUtils';
 
 export const organizationSchema = yup.object().shape({
   name: yup.string().required('Required Field'),
+  prefix: yup.string().optional(),
   icon: yup
     .string()
     .test({

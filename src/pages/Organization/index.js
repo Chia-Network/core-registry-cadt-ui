@@ -99,6 +99,23 @@ const Organization = () => {
         </StyledItemContainer>
         <StyledItemContainer>
           <Body size="Big Bold">
+            <FormattedMessage id="organization-prefix" />
+          </Body>
+          <Body size="Big">
+            {myOrganization.prefix}
+            <StyledCopyIconContainer>
+              <CopyIcon
+                height={18}
+                width={18}
+                onClick={() => {
+                  navigator.clipboard.writeText(myOrganization.prefix);
+                }}
+              />
+            </StyledCopyIconContainer>
+          </Body>
+        </StyledItemContainer>
+        <StyledItemContainer>
+          <Body size="Big Bold">
             <FormattedMessage id="org-uid" />
           </Body>
           <Body size="Big">
@@ -207,6 +224,7 @@ const Organization = () => {
           onClose={() => setIsEditModalOpen(false)}
           name={myOrganization?.name}
           icon={myOrganization?.icon}
+          prefix={myOrganization?.prefix}
         />
       )}
       {isDeleteModalOpen && (
