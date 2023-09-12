@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { LocaleSwitcher, Body, AppLogo, MyAccount } from '..';
 
 const Headline = styled('div')`
-  border-top: 8px solid ${props => props.theme.colors.default.secondary};
   padding-top: 5px;
   padding-bottom: 5px;
   width: 100%;

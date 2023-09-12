@@ -208,7 +208,6 @@ const Modal = withTheme(
                   size="large"
                   label={intl.formatMessage({ id: 'cancel' })}
                   onClick={onClose}
-                  type="default"
                 />
               )}
               {extraButtonLabel && extraButtonOnClick && (
@@ -216,7 +215,6 @@ const Modal = withTheme(
                   size="large"
                   label={extraButtonLabel}
                   onClick={extraButtonOnClick}
-                  type="default"
                 />
               )}
               <PrimaryButton

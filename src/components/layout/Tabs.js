@@ -5,19 +5,20 @@ import styled from 'styled-components';
 
 const StyledTabs = styled(MuiTabs)`
   .MuiButtonBase-root {
-    color: ${props => props.theme.colors.default.secondary};
+    color: #6e7d7f;
+    font-family: ${props => props.theme.typography.primary.semiBold};
   }
 
   .MuiButtonBase-root:hover {
-    color: ${props => props.theme.colors.default.secondaryDark};
+    color: ${props => props.theme.colors.default.primary};
   }
 
   button.Mui-selected {
-    color: ${props => props.theme.colors.default.secondaryDark};
+    color: ${props => props.theme.colors.default.primaryDark};
   }
 
   .MuiTabs-indicator {
-    background-color: ${props => props.theme.colors.default.secondaryDark};
+    background-color: ${props => props.theme.colors.default.primaryDark};
   }
 `;
 
