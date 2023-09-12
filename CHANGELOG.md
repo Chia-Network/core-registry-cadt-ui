@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.11...1.3.0) (2023-09-12)
+
+
+### Features
+
+* light theme ([13c8c5f](https://github.com/Chia-Network/core-registry-cadt-ui/commit/13c8c5fc5a60c581ac51bdfed05aa6a78d9c06da))
+
+
+
 ## [1.2.11](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.10...1.2.11) (2023-09-07)
 
 
