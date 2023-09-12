@@ -10,9 +10,9 @@ const Button = styled('button')`
   flex-direction: row;
   max-width: 100%;
   background-color: ${props =>
-    props.danger ? '#FF4D4F' : props.theme.colors.default.secondary};
-  border: none;
-  border-radius: 2px;
+    props.danger ? '#FF4D4F' : props.theme.colors.default.secondaryDark};
+  border: 1px solid #1a8385;
+  border-radius: 5px;
   padding: 10px;
   height: 32px;
   cursor: pointer;
@@ -30,7 +30,7 @@ const Button = styled('button')`
 
   &:active {
     background-color: ${props =>
-      props.danger ? '#F5222D' : props.theme.colors.default.secondary};
+      props.danger ? '#F5222D' : props.theme.colors.default.secondaryDark};
   }
 
   ${props =>
@@ -117,7 +117,7 @@ const PrimaryButton = ({
           <span style={{ width: size === 'small' ? 2 : 5 }}></span>
         </>
       )}
-      <ButtonText color={disabled ? '#BFBFBF' : 'white'}>{label}</ButtonText>
+      <ButtonText color={disabled ? '#BFBFBF' : '#0E172B'}>{label}</ButtonText>
     </Button>
   );
 };

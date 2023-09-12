@@ -37,22 +37,23 @@ const NavContainer = styled('div')`
 `;
 
 const MenuItem = styled(Link)`
-  background: ${props =>
-    props.selected ? props.theme.colors.default.secondaryDark : 'transparent'};
+  background: ${props => (props.selected ? 'white' : 'transparent')};
+  :hover {
+    background: ${props => props.theme.colors.default.primary};
+  }
+  padding: 0.5625rem 0rem 0.75rem 3.25rem;
+  text-transform: uppercase;
   ${props =>
-    !props.selected &&
-    !props.disabled &&
-    `:hover {background: ${props.theme.colors.default.secondary};}`};
-  padding: 0.5625rem 0rem 0.75rem 2.75rem;
-  ${props =>
-    props.disabled ? 'color: #BFBFBF; pointer-events: none;' : 'color: white;'}
+    props.selected
+      ? `color: ${props.theme.colors.default.primary};`
+      : 'color: #6e7d7f;'}
   font-family: ${props => props.theme.typography.primary.bold};
   cursor: pointer;
   display: block;
   text-decoration: none;
   width: calc(100% - 1.625rem);
   margin: auto;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   box-sizing: border-box;
   border-radius: 0.625rem;
   margin-bottom: 0.625rem;
@@ -108,7 +109,7 @@ const LeftNav = withTheme(({ children }) => {
     <Container>
       <NavContainer>
         <StyledTitleContainer>
-          <WarehouseIcon height={24} width={24} />
+          <WarehouseIcon height={24} width={24} color="#6e7d7f" />
           <ButtonText>
             <FormattedMessage id="warehouse" />
           </ButtonText>
