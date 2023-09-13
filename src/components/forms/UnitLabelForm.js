@@ -123,7 +123,7 @@ const UnitLabelForm = memo(
 
     const projectsSelectOptions = useMemo(() => {
       if (myProjects?.length > 0) {
-        return myProjects.reduce((accumulator, project) => {
+        return myProjects?.reduce((accumulator, project) => {
           if (project?.labels?.length > 0) {
             const optionsForTheCurrentProject = project.labels.map(label => ({
               value: label.id,
@@ -201,7 +201,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'way-to-add-label',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -242,7 +243,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'select-existing-label',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -283,7 +285,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'select-label-by-project',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -330,7 +333,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-label-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -370,7 +374,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-label-type-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -405,7 +410,8 @@ const UnitLabelForm = memo(
                         <ToolTipContainer
                           tooltip={intl.formatMessage({
                             id: 'labels-label-link-description',
-                          })}>
+                          })}
+                        >
                           <DescriptionIcon height="14" width="14" />
                         </ToolTipContainer>
                       </Body>
@@ -444,7 +450,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-validity-period-start-date-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -480,7 +487,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-validity-period-end-date-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -516,7 +524,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-crediting-period-start-date-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -554,7 +563,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-crediting-period-end-date-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>
@@ -590,7 +600,8 @@ const UnitLabelForm = memo(
                       <ToolTipContainer
                         tooltip={intl.formatMessage({
                           id: 'labels-unit-quantity-description',
-                        })}>
+                        })}
+                      >
                         <DescriptionIcon height="14" width="14" />
                       </ToolTipContainer>
                     </Body>

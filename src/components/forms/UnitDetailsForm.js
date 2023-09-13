@@ -55,10 +55,13 @@ const UnitDetailsForm = ({ noUnitCount = false }) => {
 
   const projectsSelectOptions = useMemo(() => {
     if (myProjects) {
-      return myProjects.map(projectItem => ({
-        value: projectItem,
-        label: projectItem.projectName,
-      }));
+      console.log('@@@@', myProjects);
+      return (
+        myProjects?.map(projectItem => ({
+          value: projectItem,
+          label: projectItem.projectName,
+        })) || []
+      );
     }
     return [];
   }, [myProjects]);

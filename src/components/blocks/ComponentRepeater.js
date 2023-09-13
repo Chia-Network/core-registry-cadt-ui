@@ -77,7 +77,7 @@ const ComponentRepeater = ({
       {addIcon && values.length < maxRepetitions && (
         <StyledRepeatedComponentContainer onClick={addNewInstance}>
           {addIcon}
-          <Body color="#1890ff">
+          <Body color="#6e7d7f">
             <FormattedMessage id="click-to-add" />
             {useToolTip && (
               <ToolTipContainer tooltip={useToolTip}>
