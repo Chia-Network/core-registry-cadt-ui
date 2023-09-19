@@ -124,7 +124,7 @@ const StyledCreateOneNowContainer = styled('div')`
   margin-left: 0.3125rem;
   display: inline-block;
   cursor: pointer;
-  color: #1890ff;
+  color: ${props => props.theme.colors.default.secondaryDark};
 `;
 
 const NoDataMessageContainer = styled('div')`

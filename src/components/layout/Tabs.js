@@ -14,11 +14,11 @@ const StyledTabs = styled(MuiTabs)`
   }
 
   button.Mui-selected {
-    color: ${props => props.theme.colors.default.primaryDark};
+    color: ${props => props.theme.colors.default.secondaryDark};
   }
 
   .MuiTabs-indicator {
-    background-color: ${props => props.theme.colors.default.primaryDark};
+    background-color: ${props => props.theme.colors.default.secondaryDark};
   }
 `;
 

@@ -11,7 +11,7 @@ const Button = styled('button')`
   max-width: 100%;
   background-color: ${props =>
     props.danger ? '#FF4D4F' : props.theme.colors.default.secondaryDark};
-  border: 1px solid #1a8385;
+  border: none;
   border-radius: 5px;
   padding: 10px;
   height: 32px;
@@ -74,12 +74,15 @@ const Button = styled('button')`
 
         h4 {
           color: ${props.theme.colors.default.secondary};
+          font-weight: 700 !important;
         }
         h4:hover {
           color: ${props.theme.colors.default.secondaryDark};
+          font-weight: 700 !important;
         }
         h4:active {
           color: ${props.theme.colors.default.secondary};
+          font-weight: 700 !important;
         }
       `;
     }
@@ -117,7 +120,7 @@ const PrimaryButton = ({
           <span style={{ width: size === 'small' ? 2 : 5 }}></span>
         </>
       )}
-      <ButtonText color={disabled ? '#BFBFBF' : '#0E172B'}>{label}</ButtonText>
+      <ButtonText color={disabled ? '#BFBFBF' : 'white'}>{label}</ButtonText>
     </Button>
   );
 };
