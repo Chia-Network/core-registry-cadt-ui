@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import styled, { withTheme } from 'styled-components';
 
 const Text = styled('h4')`
-  color: ${props => props.color || '#6e7d7f'} !important;
+  color: ${props => props.color || 'white'} !important;
   font-size: 1rem;
   font-family: ${props => props.theme.typography.primary.regular};
   line-height: 1.375rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   text-transform: capitalize;
   margin: 0;
   padding: 0;

@@ -21,6 +21,7 @@ const StyledRepeatedComponentContainer = styled('div')`
   align-items: center;
   gap: 10px;
   margin: 20px 0;
+  color: #6e7d7f;
   ${props => !props.disabled && `cursor: pointer;`};
 `;
 

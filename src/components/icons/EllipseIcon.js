@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 
-const EllipseIcon = withTheme(({ width, height, fill }) => {
+const EllipseIcon = withTheme(({ width, height, fill = '#6e7d7f' }) => {
   return (
     <svg
       width={`${width}px`}

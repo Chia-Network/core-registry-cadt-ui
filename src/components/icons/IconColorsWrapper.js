@@ -12,7 +12,7 @@ export const IconColorsWrapper = styled('div')`
   color: ${props =>
     props.type === IconColorsWrapperTypeEnum.red
       ? props.theme.colors.default.shade2
-      : props.theme.colors.default.secondary};
+      : props.theme.colors.default.primary};
 
   :hover {
     color: ${props =>
