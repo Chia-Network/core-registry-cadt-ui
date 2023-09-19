@@ -1,3 +1,13 @@
+## [1.3.1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.0...1.3.1) (2023-09-19)
+
+
+### Bug Fixes
+
+* missing colors ([7be8d73](https://github.com/Chia-Network/core-registry-cadt-ui/commit/7be8d733326148a1d23d63e34696c07a7a45c7a1))
+* various UI glitches ([f0136fd](https://github.com/Chia-Network/core-registry-cadt-ui/commit/f0136fd8bb0fc804f4e549430c73bdd2858c82bd))
+
+
+
 # [1.3.0](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.2.11...1.3.0) (2023-09-12)
 
 
