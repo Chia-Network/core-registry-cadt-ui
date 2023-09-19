@@ -74,15 +74,14 @@ const Button = styled('button')`
 
         h4 {
           color: ${props.theme.colors.default.secondary};
-          font-weight: 700 !important;
         }
+
         h4:hover {
           color: ${props.theme.colors.default.secondaryDark};
-          font-weight: 700 !important;
         }
+
         h4:active {
           color: ${props.theme.colors.default.secondary};
-          font-weight: 700 !important;
         }
       `;
     }
