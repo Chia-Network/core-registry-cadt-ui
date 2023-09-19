@@ -1,7 +1,18 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CircularProgress } from '@mui/material';
 import { ButtonText } from '../typography';
+
+const getHeightPadding = size => {
+  switch (size) {
+    case 'large':
+      return 'height: 40px !important; padding: 15px !important;';
+    case 'small':
+      return 'height: 28px !important; padding: 3px !important;';
+    default:
+      return '';
+  }
+};
 
 const Button = styled('button')`
   display: flex;
@@ -9,83 +20,62 @@ const Button = styled('button')`
   align-items: center;
   flex-direction: row;
   max-width: 100%;
-  background-color: ${props =>
-    props.danger ? '#FF4D4F' : props.theme.colors.default.secondaryDark};
+  background-color: ${({ danger, theme }) =>
+    danger ? '#FF4D4F' : theme.colors.default.secondaryDark};
   border: none;
   border-radius: 5px;
   padding: 10px;
   height: 32px;
   cursor: pointer;
-
-  ${props => props.size === 'large' && `height: 40px !important;`};
-  ${props => props.size === 'small' && `height: 28px !important;`};
-
-  ${props => props.size === 'large' && `padding: 15px !important;`};
-  ${props => props.size === 'small' && `padding: 3px !important;`};
+  ${({ size }) => getHeightPadding(size)}
 
   &:hover {
-    background-color: ${props =>
-      props.danger ? '#FF7875' : props.theme.colors.default.secondaryDark};
+    background-color: ${({ danger, theme }) =>
+      danger ? '#FF7875' : theme.colors.default.secondaryDark};
   }
 
   &:active {
-    background-color: ${props =>
-      props.danger ? '#F5222D' : props.theme.colors.default.secondaryDark};
+    background-color: ${({ danger, theme }) =>
+      danger ? '#F5222D' : theme.colors.default.secondaryDark};
   }
 
-  ${props =>
-    props.loading &&
+  ${({ loading, danger, theme }) =>
+    loading &&
     `
-      background-color: ${props =>
-        props.danger ? '#FF7875' : props.theme.colors.default.secondaryDark};
+    background-color: ${
+      danger ? '#FF7875' : theme.colors.default.secondaryDark
+    };
     opacity: 0.65;
   `}
 
   &:disabled {
     background-color: #f5f5f5;
     border: 1px solid #d9d9d9;
-    box-sizing: border-box;
     cursor: default;
   }
 
-  ${props => {
-    if (props.type === 'default') {
-      if (props.loading) {
-        return `
-          background-color: white;
-          :hover, :active {
-            background-color: white;
-          };
-          h4 { color: #BFBFBF };
-          border: 1px solid #e5e5e5;
-        `;
-      }
-      return css`
-        background-color: white;
-        :hover,
-        :active {
-          background-color: white;
-        }
+  ${({ type, theme, loading }) =>
+    type === 'default' &&
+    `
+    background-color: white;
+    border: 1px solid #e5e5e5;
 
-        border: 1px solid #e5e5e5;
-        :active {
-          border: 1px solid #096dd9;
-        }
-
-        h4 {
-          color: ${props.theme.colors.default.secondary};
-        }
-
-        h4:hover {
-          color: ${props.theme.colors.default.secondaryDark};
-        }
-
-        h4:active {
-          color: ${props.theme.colors.default.secondary};
-        }
-      `;
+    &:hover, &:active {
+      background-color: white;
     }
-  }};
+
+    h4 {
+      color: ${loading ? '#BFBFBF' : theme.colors.default.secondary};
+
+      &:hover {
+        color: ${theme.colors.default.secondaryDark};
+      }
+
+      &:active {
+        color: ${theme.colors.default.secondary};
+      }
+    }
+  `}
 `;
 
 const PrimaryButton = ({
