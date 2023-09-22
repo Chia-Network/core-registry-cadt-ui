@@ -111,7 +111,7 @@ const LeftNav = withTheme(({ children, theme }) => {
         <StyledTitleContainer>
           <WarehouseIcon height={24} width={24} color="#6e7d7f" />
           <ButtonText color={theme.colors.default.primary}>
-            <FormattedMessage id="warehouse" />
+            <FormattedMessage id="cadt" />
           </ButtonText>
         </StyledTitleContainer>
         <MenuItem selected={isProjectsPage && !isMyRegistryPage} to="/projects">
