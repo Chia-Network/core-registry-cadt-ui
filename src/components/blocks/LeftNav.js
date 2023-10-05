@@ -70,7 +70,7 @@ const StyledTitleContainer = styled('div')`
   margin: 46px 0px 1.3125rem 1.3rem;
 `;
 
-const LeftNav = withTheme(({ children }) => {
+const LeftNav = withTheme(({ children, theme }) => {
   const location = useLocation();
   const [confirmCreateOrgIsVisible, setConfirmCreateOrgIsVisible] =
     useState(false);
@@ -110,8 +110,8 @@ const LeftNav = withTheme(({ children }) => {
       <NavContainer>
         <StyledTitleContainer>
           <WarehouseIcon height={24} width={24} color="#6e7d7f" />
-          <ButtonText>
-            <FormattedMessage id="warehouse" />
+          <ButtonText color={theme.colors.default.primary}>
+            <FormattedMessage id="cadt" />
           </ButtonText>
         </StyledTitleContainer>
         <MenuItem selected={isProjectsPage && !isMyRegistryPage} to="/projects">
@@ -133,7 +133,7 @@ const LeftNav = withTheme(({ children }) => {
             <StyledTitleContainer disabled={!isMyOrgCreated || isMyOrgPending}>
               {isMyOrgPending && <CircularProgress size={20} thickness={5} />}
               {!isMyOrgPending && <RegistryIcon height={20} width={20} />}
-              <ButtonText>
+              <ButtonText color={theme.colors.default.primary}>
                 <FormattedMessage id="my-registry" />
               </ButtonText>
             </StyledTitleContainer>

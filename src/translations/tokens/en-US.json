@@ -190,6 +190,7 @@
   "no-failed": "No failed data at this time",
   "projects": "Projects",
   "warehouse": "Warehouse",
+  "cadt": "CAD Trust",
   "units": "Units",
   "storybook": "Storybook",
   "current-registry": "Current Registry",
