@@ -1,3 +1,18 @@
+## [1.3.2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.1...1.3.2) (2023-10-05)
+
+
+### Bug Fixes
+
+* socket timeout logic ([29aca01](https://github.com/Chia-Network/core-registry-cadt-ui/commit/29aca01524cab77489cc62d71bf6a33689adb22b))
+* white header text ([a2b6dfb](https://github.com/Chia-Network/core-registry-cadt-ui/commit/a2b6dfbbf89d718581739b2f22dd0c7fdb9797a3))
+
+
+### Features
+
+* rename warehouse to cad trust ([18b7978](https://github.com/Chia-Network/core-registry-cadt-ui/commit/18b7978244dc4ef8dfbf5b56a8b221cc361a9f4b))
+
+
+
 ## [1.3.1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.0...1.3.1) (2023-09-19)
 
 
