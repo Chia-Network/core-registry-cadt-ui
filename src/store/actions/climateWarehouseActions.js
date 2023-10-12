@@ -65,11 +65,15 @@ export const actions = keyMirror(
   'GET_TRANSFER_OFFER',
 );
 
+/*
+ * the option storeFullResponse means that we are storing the entire response instead of just the data object
+ * this is needed because there is currently an inconsistency in how the responses are managed that needs to be fixed.
+ */
 const getClimateWarehouseTable = (
   url,
   action,
   mockAction,
-  { useMockedResponse = false, useApiMock = false },
+  { useMockedResponse = false, useApiMock = false, storeFullResponse = false },
 ) => {
   return async dispatch => {
     dispatch(activateProgressIndicator);
@@ -91,7 +95,8 @@ const getClimateWarehouseTable = (
           if (
             typeof results === 'object' &&
             results !== null &&
-            'data' in results
+            'data' in results &&
+            storeFullResponse === false
           ) {
             dispatch({
               type: action,
@@ -2379,6 +2384,7 @@ export const getRatings = options => {
 
 export const getAudit = options => {
   return dispatch => {
+    console.log({ options });
     if (options?.orgUid && options?.limit && options?.page) {
       dispatch(
         getClimateWarehouseTable(
