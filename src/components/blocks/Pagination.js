@@ -59,7 +59,7 @@ const PagesContainer = styled(ControlsContainer)`
                     color: ${props.theme.colors.default.secondaryDark};`;
     } else {
       return `border: 1px solid ${props.theme.colors.default.shade5};
-                    color: ${props.theme.colors.default.secondary};`;
+                    color: #586065;`;
     }
   }};
 
@@ -69,8 +69,8 @@ const PagesContainer = styled(ControlsContainer)`
         return `border: 1px solid ${props.theme.colors.default.secondaryDark};
                     color: ${props.theme.colors.default.secondaryDark};`;
       } else {
-        return `border: 1px solid ${props.theme.colors.default.secondaryDark};
-                    color: ${props.theme.colors.default.secondaryDark};`;
+        return `border: 1px solid ${props.theme.colors.default.shade5};
+                    color: ${props.theme.colors.default.shade5};`;
       }
     }};
   }
@@ -112,7 +112,7 @@ const Pagination = withTheme(
             !backButtonIsDisabled && changeCurrentPageTo(currentPageNumber - 1)
           }
         >
-          <ArrowDownIcon height={12} width={12} />
+          <ArrowDownIcon height={12} width={12} color="#586065" />
         </ControlsContainer>
         {displayedPages &&
           displayedPages.map(element => (
@@ -130,7 +130,7 @@ const Pagination = withTheme(
           currentPageNumber + 2 + 1 < numberOfPages &&
           numberOfPages > 5 && (
             <>
-              <ThreeDotsIcon width={10} height={10} />
+              <ThreeDotsIcon width={10} height={10} color="#586065" />
               <PagesContainer
                 onClick={() => changeCurrentPageTo(numberOfPages)}
               >
@@ -145,7 +145,7 @@ const Pagination = withTheme(
             !nextButtonIsDisabled && changeCurrentPageTo(currentPageNumber + 1)
           }
         >
-          <ArrowDownIcon height={12} width={12} />
+          <ArrowDownIcon height={12} width={12} color="#586065" />
         </ControlsContainer>
       </PaginationContainer>
     );

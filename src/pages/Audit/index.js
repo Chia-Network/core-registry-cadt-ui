@@ -118,6 +118,7 @@ const Audit = () => {
         limit: constants.MAX_AUDIT_TABLE_SIZE,
         useMockedResponse: false,
         order: newSortOrder,
+        storeFullResponse: true,
       }),
     );
   }, [auditSortOrder, setAuditSortOrder, selectedOrgUid]);
@@ -133,6 +134,7 @@ const Audit = () => {
           limit: constants.MAX_AUDIT_TABLE_SIZE,
           useMockedResponse: false,
           order: auditSortOrder,
+          storeFullResponse: true,
         }),
       );
     },
@@ -195,6 +197,7 @@ const Audit = () => {
                       limit: constants.MAX_AUDIT_TABLE_SIZE,
                       useMockedResponse: false,
                       order: auditSortOrder,
+                      storeFullResponse: true,
                     }),
                   )
                 }
