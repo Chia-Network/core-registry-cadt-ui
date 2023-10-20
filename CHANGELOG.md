@@ -1,3 +1,13 @@
+## [1.3.3](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.2...1.3.3) (2023-10-20)
+
+
+### Bug Fixes
+
+* audit table rendering ([489fb69](https://github.com/Chia-Network/core-registry-cadt-ui/commit/489fb69f73e0d227ddf982f25f95babc6f99da6a))
+* pagination ([4514b92](https://github.com/Chia-Network/core-registry-cadt-ui/commit/4514b92e44cd6b97fde14b69d8bca3efef062680))
+
+
+
 ## [1.3.2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.1...1.3.2) (2023-10-05)
 
 
