@@ -171,18 +171,24 @@ const Projects = withTheme(({ theme }) => {
   const [isImportOfferModalVisible, setIsImportModalVisible] = useState(false);
   const windowSize = useWindowSize();
 
+  const fetchProjects = () => {
+    const projectId = searchParams.get('projectId');
+    if (projectId) {
+      dispatch(getProjectData(projectId));
+    }
+    dispatch(getStagingData({ useMockedResponse: false }));
+  };
+
   const handleTabChange = useCallback(
     (event, newValue) => {
       setTabValue(newValue);
+      fetchProjects();
     },
     [setTabValue],
   );
 
   useEffect(() => {
-    const projectId = searchParams.get('projectId');
-    if (projectId) {
-      dispatch(getProjectData(projectId));
-    }
+    fetchProjects();
     return () => dispatch(clearProjectData());
   }, [searchParams.get('projectId')]);
 
