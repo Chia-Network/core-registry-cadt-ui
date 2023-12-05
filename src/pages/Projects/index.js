@@ -18,10 +18,7 @@ import {
   addIsMakerPropToChangeGroups,
   convertProcessedOfferToStagingChangeGroups,
 } from '../../utils/transferOfferUtils';
-import {
-  getIssuances,
-  getProjects,
-} from '../../store/actions/climateWarehouseActions';
+import { getIssuances } from '../../store/actions/climateWarehouseActions';
 
 import {
   APIDataTable,
@@ -391,7 +388,6 @@ const Projects = withTheme(({ theme }) => {
 
   useEffect(() => {
     dispatch(getIssuances());
-    dispatch(getProjects({ useMockedResponse: false, useApiMock: false }));
   }, []);
 
   if (!filteredColumnsTableData) {
