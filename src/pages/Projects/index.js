@@ -18,10 +18,7 @@ import {
   addIsMakerPropToChangeGroups,
   convertProcessedOfferToStagingChangeGroups,
 } from '../../utils/transferOfferUtils';
-import {
-  getIssuances,
-  getProjects,
-} from '../../store/actions/climateWarehouseActions';
+import { getIssuances } from '../../store/actions/climateWarehouseActions';
 
 import {
   APIDataTable,
@@ -171,18 +168,24 @@ const Projects = withTheme(({ theme }) => {
   const [isImportOfferModalVisible, setIsImportModalVisible] = useState(false);
   const windowSize = useWindowSize();
 
+  const fetchProjects = () => {
+    const projectId = searchParams.get('projectId');
+    if (projectId) {
+      dispatch(getProjectData(projectId));
+    }
+    dispatch(getStagingData({ useMockedResponse: false }));
+  };
+
   const handleTabChange = useCallback(
     (event, newValue) => {
       setTabValue(newValue);
+      fetchProjects();
     },
     [setTabValue],
   );
 
   useEffect(() => {
-    const projectId = searchParams.get('projectId');
-    if (projectId) {
-      dispatch(getProjectData(projectId));
-    }
+    fetchProjects();
     return () => dispatch(clearProjectData());
   }, [searchParams.get('projectId')]);
 
@@ -385,7 +388,6 @@ const Projects = withTheme(({ theme }) => {
 
   useEffect(() => {
     dispatch(getIssuances());
-    dispatch(getProjects({ useMockedResponse: false, useApiMock: false }));
   }, []);
 
   if (!filteredColumnsTableData) {

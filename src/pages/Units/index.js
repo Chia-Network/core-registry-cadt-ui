@@ -153,9 +153,18 @@ const Units = withTheme(({ theme }) => {
   const [modalSizeAndPosition, setModalSizeAndPosition] = useState(null);
   const windowSize = useWindowSize();
 
+  const fetchUnits = () => {
+    const unitId = searchParams.get('unitId');
+    if (unitId) {
+      dispatch(getUnitData(unitId));
+    }
+    dispatch(getStagingData({ useMockedResponse: false }));
+  };
+
   const handleTabChange = useCallback(
     (event, newValue) => {
       setTabValue(newValue);
+      fetchUnits();
     },
     [setTabValue],
   );
