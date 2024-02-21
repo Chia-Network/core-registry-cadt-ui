@@ -1,3 +1,14 @@
+## [1.3.4](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.3...1.3.4) (2024-02-21)
+
+
+### Bug Fixes
+
+* content type for edit org ([1ddcf5c](https://github.com/Chia-Network/core-registry-cadt-ui/commit/1ddcf5c03c99874d2abeaa39f1875a28f97bcee7))
+* fix project fetch mismatch on my projects page ([d8d46eb](https://github.com/Chia-Network/core-registry-cadt-ui/commit/d8d46ebf6d543cea01281a2028c80b378c5ff02a))
+* redownload data on tab click for units and projects ([8f6ab9c](https://github.com/Chia-Network/core-registry-cadt-ui/commit/8f6ab9c9e565a5d5cf8e89e2c8dc8ac23a1b0d0b))
+
+
+
 ## [1.3.3](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.2...1.3.3) (2023-10-20)
 
 
