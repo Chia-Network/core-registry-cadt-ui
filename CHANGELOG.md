@@ -1,3 +1,7 @@
+## [1.3.6](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.5...1.3.6) (2024-03-07)
+
+
+
 ## [1.3.5](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.4...1.3.5) (2024-03-01)
 
 
