@@ -171,6 +171,10 @@ export const signInFromLocalStorage = () => {
       try {
         const response = await fetch(`${serverAddress}/v1/organizations`, {
           method: 'HEAD',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+          },
         });
         if (response.status !== 200) {
           console.error(`Server returned status: ${response.status}`);
