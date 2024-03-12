@@ -1,3 +1,12 @@
+## [1.3.8](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.7...1.3.8) (2024-03-12)
+
+
+### Bug Fixes
+
+* conditionally add the api key header ([c6562a4](https://github.com/Chia-Network/core-registry-cadt-ui/commit/c6562a43a64e35640e538e81e08aa88d5bad58d0))
+
+
+
 ## [1.3.7](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.6...1.3.7) (2024-03-12)
 
 
