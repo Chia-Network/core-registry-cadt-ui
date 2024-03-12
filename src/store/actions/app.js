@@ -167,14 +167,19 @@ export const signInFromLocalStorage = () => {
     const serverAddress = localStorage.getItem('cadtRemoteServerAddress');
 
     if (serverAddress) {
+      // Construct headers conditionally based on apiKey existence
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      if (apiKey) {
+        headers['x-api-key'] = apiKey;
+      }
+
       // Ping the server to check if it's reachable and returns a 200 status.
       try {
         const response = await fetch(`${serverAddress}/v1/organizations`, {
           method: 'HEAD',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': apiKey,
-          },
+          headers: headers,
         });
         if (response.status !== 200) {
           console.error(`Server returned status: ${response.status}`);
