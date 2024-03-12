@@ -1,3 +1,12 @@
+## [1.3.7](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.6...1.3.7) (2024-03-12)
+
+
+### Bug Fixes
+
+* add api key to signin from local ([d69ccad](https://github.com/Chia-Network/core-registry-cadt-ui/commit/d69ccad7593c75ff8c51bf7b698d53214d3f5361))
+
+
+
 ## [1.3.6](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.5...1.3.6) (2024-03-07)
 
 
