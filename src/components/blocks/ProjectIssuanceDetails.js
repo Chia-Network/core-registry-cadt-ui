@@ -74,11 +74,11 @@ const ProjectIssuanceDetails = ({ data, stagingData, changeColor }) => {
                 changeColor,
               )}
           </StyledItem>
-          {data && <DetailedViewIssuanceUnitTable issuance={data} />}
-          {stagingData && (
-            <DetailedViewIssuanceUnitTable issuance={stagingData} />
-          )}
         </StyledDetailedViewTab>
+        {data && <DetailedViewIssuanceUnitTable issuance={data} />}
+        {stagingData && (
+          <DetailedViewIssuanceUnitTable issuance={stagingData} />
+        )}
       </div>
     </StyledDetailedViewTabItem>
   );
