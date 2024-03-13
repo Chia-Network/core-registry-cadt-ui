@@ -2491,8 +2491,10 @@ export const mockUnitsResponse = {
 
 export const getUnits = options => {
   const url = options?.searchQuery
-    ? `${constants.API_HOST}/units?page=1&limit=10&search=${options.searchQuery}`
-    : `${constants.API_HOST}/units?page=1&limit=10&`;
+    ? `${constants.API_HOST}/units?page=1&limit=100&search=${options.searchQuery}`
+    : `${constants.API_HOST}/units?page=1&limit=100&${
+        options?.additionalQuery || ''
+      }`;
 
   return dispatch => {
     dispatch(

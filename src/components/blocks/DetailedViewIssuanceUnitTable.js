@@ -60,7 +60,13 @@ const DetailedViewIssuanceUnitTable = ({ issuance }) => {
   ]);
 
   useEffect(() => {
-    dispatch(getUnits({ useMockedResponse: false, useApiMock: false }));
+    dispatch(
+      getUnits({
+        additionalQuery: `orgUid=${issuance.orgUid}`,
+        useMockedResponse: false,
+        useApiMock: false,
+      }),
+    );
   }, []);
 
   const handleChangePage = (event, newPage) => {
