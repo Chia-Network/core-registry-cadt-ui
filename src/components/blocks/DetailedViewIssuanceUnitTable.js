@@ -60,7 +60,13 @@ const DetailedViewIssuanceUnitTable = ({ issuance }) => {
   ]);
 
   useEffect(() => {
-    dispatch(getUnits({ useMockedResponse: false, useApiMock: false }));
+    dispatch(
+      getUnits({
+        additionalQuery: `orgUid=${issuance.orgUid}`,
+        useMockedResponse: false,
+        useApiMock: false,
+      }),
+    );
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -101,9 +107,13 @@ const DetailedViewIssuanceUnitTable = ({ issuance }) => {
       </Body>
       <Spacing />
       {unitsBelongingToThisIssuance?.length > 0 && (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Paper sx={{ width: '100%', overflow: 'scroll' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              sx={{ minWidth: 650, width: '100%' }}
+            >
               <TableHead>
                 <TableRow>
                   {columns.map(column => (
