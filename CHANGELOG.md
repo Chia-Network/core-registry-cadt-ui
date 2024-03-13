@@ -1,3 +1,13 @@
+## [1.3.9](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.8...1.3.9) (2024-03-13)
+
+
+### Bug Fixes
+
+* issuance table ([a93f365](https://github.com/Chia-Network/core-registry-cadt-ui/commit/a93f3659e9f035c3d9509f3002d4e9cd8f41369b))
+* issuance view ([262a3d4](https://github.com/Chia-Network/core-registry-cadt-ui/commit/262a3d49510d02a86cd4ffa1209e387043fccad7))
+
+
+
 ## [1.3.8](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.7...1.3.8) (2024-03-12)
 
 
