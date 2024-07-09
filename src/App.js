@@ -22,6 +22,7 @@ import {
   IndeterminateProgressOverlay,
   SocketStatusContainer,
 } from './components';
+import { LocaleChangeListener } from './components/blocks/LocaleChangeListener';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const App = () => {
         defaultLocale="en"
         messages={translationTokens.default}
       >
+        <LocaleChangeListener />
         <AppNavigator />
       </IntlProvider>
       <SocketStatusContainer socketStatus={socketStatus} />
