@@ -1,3 +1,12 @@
+## [1.3.10](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.9...1.3.10) (2024-07-25)
+
+
+### Features
+
+* update localization to receive and apply locale changes from core-registery-ui ([1af1e06](https://github.com/Chia-Network/core-registry-cadt-ui/commit/1af1e06309859cacc7979cbcae0dfba188503706))
+
+
+
 ## [1.3.9](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.8...1.3.9) (2024-03-13)
 
 
