@@ -16,7 +16,7 @@ export const issuanceSchema = yup
     verificationApproach: yup
       .string()
       .required('yup-validation-field-required'),
-    verificationBody: yup.string().required('yup-validation-field-required'),
+    verificationBody: yup.string().optional(),
     verificationReportDate: yup
       .date()
       .typeError('yup-validation-date')
