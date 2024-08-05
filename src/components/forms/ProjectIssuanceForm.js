@@ -60,7 +60,8 @@ const ProjectIssuanceForm = memo(
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'issuances-start-date-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -93,7 +94,8 @@ const ProjectIssuanceForm = memo(
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'issuances-end-date-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -121,12 +123,13 @@ const ProjectIssuanceForm = memo(
               <StyledLabelContainer>
                 <Body>
                   <LabelContainer>
-                    *<FormattedMessage id="verification-body" />
+                    <FormattedMessage id="verification-body" />
                   </LabelContainer>
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'issuances-verification-body-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -160,7 +163,8 @@ const ProjectIssuanceForm = memo(
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'issuances-verification-report-date-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>
@@ -194,7 +198,8 @@ const ProjectIssuanceForm = memo(
                     <ToolTipContainer
                       tooltip={intl.formatMessage({
                         id: 'id',
-                      })}>
+                      })}
+                    >
                       <DescriptionIcon height="14" width="14" />
                     </ToolTipContainer>
                   </Body>
@@ -220,7 +225,8 @@ const ProjectIssuanceForm = memo(
                   <ToolTipContainer
                     tooltip={intl.formatMessage({
                       id: 'issuances-verification-approach-description',
-                    })}>
+                    })}
+                  >
                     <DescriptionIcon height="14" width="14" />
                   </ToolTipContainer>
                 </Body>

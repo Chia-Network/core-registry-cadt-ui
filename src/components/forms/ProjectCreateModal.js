@@ -215,6 +215,7 @@ const ProjectCreateModal = ({ onClose, modalSizeAndPosition }) => {
                       id: 'issuances-optional',
                     })}
                     min={0}
+                    F
                     Component={ProjectIssuanceForm}
                   />
                 </TabPanel>
