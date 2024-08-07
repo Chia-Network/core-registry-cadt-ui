@@ -30,9 +30,9 @@ const App = () => {
   const appStore = useSelector(state => state.app);
   const [translationTokens, setTranslationTokens] = useState();
 
-  function notifyParentWhenAppLoaded() {
+  const notifyParentWhenAppLoaded = () => {
     window.parent.postMessage('appLoaded', window.location.origin);
-  }
+  };
 
   useEffect(() => {
     const handleMessage = event => {
