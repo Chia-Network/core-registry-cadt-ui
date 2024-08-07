@@ -34,18 +34,26 @@ const NavContainer = styled('div')`
   min-width: 16rem;
   height: 100%;
   background-color: ${props =>
-    props.color ?? props.theme.colors.default.shade1};
+    props.theme.customColors?.leftNavBgColor ??
+    props.theme.colors.default.shade1};
 `;
 
 const MenuItem = styled(Link)`
   background: ${props =>
-    props.selected ? props.highlightColor ?? 'white' : 'transparent'};
+    props.selected
+      ? props.theme.customColors?.leftNavHighlightColor ?? 'white'
+      : 'transparent'};
   :hover {
     background: ${props => props.theme.colors.default.primary};
   }
   padding: 0.5625rem 0rem 0.75rem 3.25rem;
   text-transform: uppercase;
-  ${props => `color: ${props.color ?? props.theme.colors.default.primary};`}
+  ${props =>
+    props.theme.customColors?.leftNavTextColor
+      ? `color: ${props.theme.customColors?.leftNavTextColor};`
+      : props.selected
+      ? `color: ${props.theme.colors.default.primary};`
+      : 'color: #6e7d7f;'}
   font-family: ${props => props.theme.typography.primary.bold};
   cursor: pointer;
   display: block;
@@ -79,30 +87,6 @@ const LeftNav = withTheme(({ children, theme }) => {
   const { isGovernance } = useSelector(state => state.climateWarehouse);
   const dispatch = useDispatch();
   const [myOrgUid, isMyOrgPending] = useSelector(store => getHomeOrg(store));
-  const [colors, setColors] = useState({
-    topBarBgColor: undefined,
-    leftNavHighlightColor: undefined,
-    leftNavBgColor: undefined,
-    leftNavTextColor: undefined,
-  });
-  function notifyParentWhenLeftNavLoaded() {
-    window.parent.postMessage('leftNavLoaded', window.location.origin);
-  }
-
-  useEffect(() => {
-    const handleMessage = event => {
-      if (event.data.colors) {
-        setColors(event.data.colors);
-      }
-    };
-    notifyParentWhenLeftNavLoaded();
-
-    window.addEventListener('message', handleMessage);
-
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
 
   const isMyOrgCreated = !!myOrgUid;
 
@@ -130,50 +114,36 @@ const LeftNav = withTheme(({ children, theme }) => {
 
   return (
     <Container>
-      <NavContainer color={colors.leftNavBgColor}>
+      <NavContainer>
         <StyledTitleContainer>
           <WarehouseIcon
             height={24}
             width={24}
-            color={colors.leftNavTextColor ?? theme.colors.default.primary}
+            color={
+              theme.customColors?.leftNavTextColor ??
+              theme.colors.default.primary
+            }
           />
           <ButtonText
-            color={colors.leftNavTextColor ?? theme.colors.default.primary}
+            color={
+              theme.customColors?.leftNavTextColor ??
+              theme.colors.default.primary
+            }
           >
             <FormattedMessage id="cadt" />
           </ButtonText>
         </StyledTitleContainer>
-        <MenuItem
-          color={colors.leftNavTextColor}
-          highlightColor={colors.leftNavHighlightColor}
-          selected={isProjectsPage && !isMyRegistryPage}
-          to="/projects"
-        >
+        <MenuItem selected={isProjectsPage && !isMyRegistryPage} to="/projects">
           <FormattedMessage id="projects-list" />
         </MenuItem>
         <div></div>
-        <MenuItem
-          color={colors.leftNavTextColor}
-          highlightColor={colors.leftNavHighlightColor}
-          selected={isUnitsPage && !isMyRegistryPage}
-          to="/units"
-        >
+        <MenuItem selected={isUnitsPage && !isMyRegistryPage} to="/units">
           <FormattedMessage id="units-list" />
         </MenuItem>
-        <MenuItem
-          color={colors.leftNavTextColor}
-          highlightColor={colors.leftNavHighlightColor}
-          selected={isAuditPage}
-          to="/audit"
-        >
+        <MenuItem selected={isAuditPage} to="/audit">
           <FormattedMessage id="audit" />
         </MenuItem>
-        <MenuItem
-          color={colors.leftNavTextColor}
-          highlightColor={colors.leftNavHighlightColor}
-          selected={isGlossaryPage}
-          to={`/glossary`}
-        >
+        <MenuItem selected={isGlossaryPage} to={`/glossary`}>
           <FormattedMessage id="glossary" />
         </MenuItem>
 
@@ -185,7 +155,8 @@ const LeftNav = withTheme(({ children, theme }) => {
                   size={20}
                   thickness={5}
                   color={
-                    colors.leftNavTextColor ?? theme.colors.default.primary
+                    theme.customColors?.leftNavTextColor ??
+                    theme.colors.default.primary
                   }
                 />
               )}
@@ -194,20 +165,22 @@ const LeftNav = withTheme(({ children, theme }) => {
                   height={20}
                   width={20}
                   color={
-                    colors.leftNavTextColor ?? theme.colors.default.primary
+                    theme.customColors?.leftNavTextColor ??
+                    theme.colors.default.primary
                   }
                 />
               )}
               <ButtonText
-                color={colors.leftNavTextColor ?? theme.colors.default.primary}
+                color={
+                  theme.customColors?.leftNavTextColor ??
+                  theme.colors.default.primary
+                }
               >
                 <FormattedMessage id="my-registry" />
               </ButtonText>
             </StyledTitleContainer>
             {!isMyOrgCreated && (
               <MenuItem
-                color={colors.leftNavTextColor}
-                highlightColor={colors.leftNavHighlightColor}
                 to={projectsPageUrl}
                 onClick={() => setCreateOrgIsVisible(true)}
               >
@@ -215,20 +188,13 @@ const LeftNav = withTheme(({ children, theme }) => {
               </MenuItem>
             )}
             {isMyOrgPending && (
-              <MenuItem
-                to={projectsPageUrl}
-                color={colors.leftNavTextColor}
-                highlightColor={colors.leftNavHighlightColor}
-                disabled
-              >
+              <MenuItem to={projectsPageUrl} disabled>
                 <FormattedMessage id="creating-organization" />
               </MenuItem>
             )}
             {isMyOrgCreated && !isMyOrgPending ? (
               <>
                 <MenuItem
-                  color={colors.leftNavTextColor}
-                  highlightColor={colors.leftNavHighlightColor}
                   selected={isProjectsPage && isMyRegistryPage}
                   to={`/projects?orgUid=${myOrgUid}&myRegistry=true`}
                 >
@@ -237,38 +203,21 @@ const LeftNav = withTheme(({ children, theme }) => {
                 <div></div>
                 <MenuItem
                   selected={isUnitsPage && isMyRegistryPage}
-                  color={colors.leftNavTextColor}
-                  highlightColor={colors.leftNavHighlightColor}
                   to={`/units?orgUid=${myOrgUid}&myRegistry=true`}
                 >
                   <FormattedMessage id="my-units" />
                 </MenuItem>
 
                 <div></div>
-                <MenuItem
-                  selected={isFilesPage}
-                  color={colors.leftNavTextColor}
-                  highlightColor={colors.leftNavHighlightColor}
-                  to={`/files`}
-                >
+                <MenuItem selected={isFilesPage} to={`/files`}>
                   <FormattedMessage id="my-files" />
                 </MenuItem>
 
-                <MenuItem
-                  selected={isOrganizationPage}
-                  color={colors.leftNavTextColor}
-                  highlightColor={colors.leftNavHighlightColor}
-                  to="/organization"
-                >
+                <MenuItem selected={isOrganizationPage} to="/organization">
                   <FormattedMessage id="my-organization" />
                 </MenuItem>
                 {isGovernance && (
-                  <MenuItem
-                    selected={isGovernancePage}
-                    color={colors.leftNavTextColor}
-                    highlightColor={colors.leftNavHighlightColor}
-                    to="/governance"
-                  >
+                  <MenuItem selected={isGovernancePage} to="/governance">
                     <FormattedMessage id="governance" />
                   </MenuItem>
                 )}
@@ -277,8 +226,6 @@ const LeftNav = withTheme(({ children, theme }) => {
               <>
                 <MenuItem
                   to={projectsPageUrl}
-                  style={{ color: colors.leftNavTextColor }}
-                  highlightColor={colors.leftNavHighlightColor}
                   onClick={() => setConfirmCreateOrgIsVisible(true)}
                   disabled
                 >
@@ -287,8 +234,6 @@ const LeftNav = withTheme(({ children, theme }) => {
                 <div></div>
                 <MenuItem
                   to={projectsPageUrl}
-                  color={colors.leftNavTextColor}
-                  highlightColor={colors.leftNavHighlightColor}
                   onClick={() => setConfirmCreateOrgIsVisible(true)}
                   disabled
                 >

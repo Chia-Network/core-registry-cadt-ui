@@ -3,11 +3,13 @@ import u from 'updeep';
 import { actions as appActions } from '../actions/app';
 import { actions as socketActions } from '../actions/socket';
 import constants from '../../constants';
+import theme from '../../theme';
 
 const initialState = {
   socketStatus: 'Waiting for status',
   showProgressOverlay: false,
   theme: constants.THEME.DEFAULT,
+  customTheme: theme,
   errorMessage: null,
   locale: null,
   connectionCheck: true,
@@ -71,7 +73,8 @@ const appReducer = (state = initialState, action) => {
         return u({ theme: action.payload }, state);
       }
       return state;
-
+    case appActions.SET_CUSTOM_THEME:
+      return { ...state, customTheme: action.payload };
     case appActions.TOGGLE_THEME:
       // eslint-disable-next-line
       const theme =
