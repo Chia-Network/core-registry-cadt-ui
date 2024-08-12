@@ -4,7 +4,6 @@ import constants from '../../constants';
 import { keyMirror } from '../store-functions';
 import { LANGUAGE_CODES } from '../../translations';
 import { getOrganizationData } from './climateWarehouseActions';
-import theme from '../../theme';
 
 export const actions = keyMirror(
   'ACTIVATE_PROGRESS_INDICATOR',
@@ -62,7 +61,7 @@ export const setThemeFromLocalStorage = {
 export const setCustomTheme = customColors => {
   return {
     type: actions.SET_CUSTOM_THEME,
-    payload: { ...theme, customColors },
+    payload: customColors,
   };
 };
 
