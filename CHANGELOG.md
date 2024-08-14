@@ -1,3 +1,21 @@
+## [1.3.11](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.10...1.3.11) (2024-08-14)
+
+
+### Bug Fixes
+
+* all the colors could be changed by parent ui, removed conditional colors rendering ([67045c8](https://github.com/Chia-Network/core-registry-cadt-ui/commit/67045c8c1b0601828fec46eab7f4376000625951))
+* remove random text ([a678f33](https://github.com/Chia-Network/core-registry-cadt-ui/commit/a678f339198b17f3b3cf29148b3002ef1ff28c5e))
+* used arrow functions ([a71ceda](https://github.com/Chia-Network/core-registry-cadt-ui/commit/a71ceda5310f57c8a9592b93564d9398a7aa4b7f))
+
+
+### Features
+
+* implement theme changing feature to sync with parent app ([c358131](https://github.com/Chia-Network/core-registry-cadt-ui/commit/c35813135351c96f5b0b9e6c5e9eb36cf4d71a42))
+* integrate theme changes received from parent app and used redux and themeProvider ([97a2100](https://github.com/Chia-Network/core-registry-cadt-ui/commit/97a210087fc33e6c3d504ad3b7de96e54d557dc8))
+* verification body is not required for issuances ([d3785da](https://github.com/Chia-Network/core-registry-cadt-ui/commit/d3785dafe93eeaf7b50d8247615112ae2e83f3ae))
+
+
+
 ## [1.3.10](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.9...1.3.10) (2024-07-25)
 
 
