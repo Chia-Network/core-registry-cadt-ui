@@ -10,6 +10,7 @@ export const actions = keyMirror(
   'DEACTIVATE_PROGRESS_INDICATOR',
   'TOGGLE_THEME',
   'SET_THEME',
+  'SET_CUSTOM_THEME',
   'SET_GLOBAL_ERROR_MESSAGE',
   'CLEAR_GLOBAL_ERROR_MESSAGE',
   'SET_LOCALE',
@@ -55,6 +56,13 @@ export const deactivateProgressIndicator = {
 export const setThemeFromLocalStorage = {
   type: actions.SET_THEME,
   payload: localStorage.getItem('theme'),
+};
+
+export const setCustomTheme = customColors => {
+  return {
+    type: actions.SET_CUSTOM_THEME,
+    payload: customColors,
+  };
 };
 
 export const toggleTheme = {

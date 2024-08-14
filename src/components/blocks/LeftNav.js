@@ -33,20 +33,23 @@ const NavContainer = styled('div')`
   width: 16rem;
   min-width: 16rem;
   height: 100%;
-  background-color: ${props => props.theme.colors.default.shade1};
+  background-color: ${props => props.theme.colors.default.leftNav.bg};
 `;
 
 const MenuItem = styled(Link)`
-  background: ${props => (props.selected ? 'white' : 'transparent')};
+  background: ${props =>
+    props.selected
+      ? props.theme.colors.default.leftNav.highlight
+      : 'transparent'};
   :hover {
     background: ${props => props.theme.colors.default.primary};
   }
   padding: 0.5625rem 0rem 0.75rem 3.25rem;
   text-transform: uppercase;
-  ${props =>
+  color: ${props =>
     props.selected
-      ? `color: ${props.theme.colors.default.primary};`
-      : 'color: #6e7d7f;'}
+      ? props.theme.colors.default.primary
+      : props.theme.colors.default.leftNav.text};
   font-family: ${props => props.theme.typography.primary.bold};
   cursor: pointer;
   display: block;
@@ -109,8 +112,12 @@ const LeftNav = withTheme(({ children, theme }) => {
     <Container>
       <NavContainer>
         <StyledTitleContainer>
-          <WarehouseIcon height={24} width={24} color="#6e7d7f" />
-          <ButtonText color={theme.colors.default.primary}>
+          <WarehouseIcon
+            height={24}
+            width={24}
+            color={theme.colors.default.leftNav.text}
+          />
+          <ButtonText color={theme.colors.default.leftNav.text}>
             <FormattedMessage id="cadt" />
           </ButtonText>
         </StyledTitleContainer>
@@ -131,9 +138,21 @@ const LeftNav = withTheme(({ children, theme }) => {
         {!readOnlyMode && (
           <>
             <StyledTitleContainer disabled={!isMyOrgCreated || isMyOrgPending}>
-              {isMyOrgPending && <CircularProgress size={20} thickness={5} />}
-              {!isMyOrgPending && <RegistryIcon height={20} width={20} />}
-              <ButtonText color={theme.colors.default.primary}>
+              {isMyOrgPending && (
+                <CircularProgress
+                  size={20}
+                  thickness={5}
+                  color={theme.colors.default.leftNav.text}
+                />
+              )}
+              {!isMyOrgPending && (
+                <RegistryIcon
+                  height={20}
+                  width={20}
+                  color={theme.colors.default.leftNav.text}
+                />
+              )}
+              <ButtonText color={theme.colors.default.leftNav.text}>
                 <FormattedMessage id="my-registry" />
               </ButtonText>
             </StyledTitleContainer>
