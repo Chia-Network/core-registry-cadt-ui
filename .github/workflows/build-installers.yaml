@@ -2,10 +2,10 @@ name: Build & Release
 
 on:
   push:
-    branches:
-      - develop
     tags:
       - '**'
+    branches:
+      - refactor/refactor-base #remove this once rebuild is merged
   pull_request:
     branches:
       - '**'
@@ -14,6 +14,10 @@ concurrency:
   # SHA is added to the end if on `main` to let all main workflows run
   group: ${{ github.ref }}-${{ github.workflow }}-${{ github.event_name }}-${{ github.ref == 'refs/heads/main' && github.sha || '' }}
   cancel-in-progress: true
+
+permissions:
+  id-token: write
+  contents: write
 
 jobs:
   build_mac:
@@ -25,10 +29,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node 18.16
+      - name: Setup Node 20
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16'
+          node-version: '20.16'
 
       - name: Install Husky
         run: npm install --save-dev husky
@@ -38,7 +42,6 @@ jobs:
 
       - name: npm install
         run: |
-          node --version
           npm install
 
       - name: Import Apple installer signing certificate
@@ -65,9 +68,8 @@ jobs:
       - name: Upload Mac Installer
         uses: actions/upload-artifact@v3
         with:
-          name: core-registry-cadt-ui-mac-installer
+          name: cadt-ui-mac-installer
           path: ${{ github.workspace }}/dist/*.dmg
-
 
   build_windows:
     name: Build Windows Installer
@@ -76,10 +78,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node 18.16
+      - name: Setup Node 20.16
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16'
+          node-version: '20.16'
 
       - name: Install Husky
         run: npm install --save-dev husky
@@ -115,7 +117,7 @@ jobs:
       - name: Upload Windows Installer
         uses: actions/upload-artifact@v3
         with:
-          name: core-registry-cadt-ui-windows-installer
+          name: cadt-ui-windows-installer
           path: "${{ github.workspace }}/${{ env.INSTALLER_FILE }}"
 
   build_linux:
@@ -125,10 +127,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node 18.16
+      - name: Setup Node 20
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16'
+          node-version: '20.16'
 
       - name: Install Husky
         run: npm install --save-dev husky
@@ -150,7 +152,7 @@ jobs:
       - name: Upload Linux Installer
         uses: actions/upload-artifact@v3
         with:
-          name: core-registry-cadt-ui-linux-installer
+          name: cadt-ui-linux-installer
           path: ${{ github.workspace }}/dist/*.deb
 
   build_web:
@@ -160,10 +162,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node 18.16
+      - name: Setup Node 20.16
         uses: actions/setup-node@v3
         with:
-          node-version: '18.16'
+          node-version: '20.16'
 
       - name: Install Husky
         run: npm install --save-dev husky
@@ -172,16 +174,16 @@ jobs:
         run: |
           node --version
           npm install
-          npm run build
+          npm run web-build
 
       - name: Create .tar.gz of the web build
-        run: tar -cvzf core-registry-cadt-ui-web-build.tar.gz build
+        run: tar -cvzf cadt-ui-web-build.tar.gz build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
-          name: core-registry-cadt-ui-web-build
-          path: core-registry-cadt-ui-web-build.tar.gz
+          name: cadt-ui-web-build
+          path: cadt-ui-web-build.tar.gz
 
   release:
     runs-on: ubuntu-latest
@@ -195,33 +197,33 @@ jobs:
       - name: Download Windows artifacts
         uses: actions/download-artifact@v3
         with:
-          name: core-registry-cadt-ui-windows-installer
-          path: core-registry-cadt-ui-windows-installer
+          name: cadt-ui-windows-installer
+          path: cadt-ui-windows-installer
 
       - name: Download MacOS artifacts
         uses: actions/download-artifact@v3
         with:
-          name: core-registry-cadt-ui-mac-installer
-          path: core-registry-cadt-ui-mac-installer
+          name: cadt-ui-mac-installer
+          path: cadt-ui-mac-installer
 
       - name: Download Linux artifacts
         uses: actions/download-artifact@v3
         with:
-          name: core-registry-cadt-ui-linux-installer
-          path: core-registry-cadt-ui-linux-installer
+          name: cadt-ui-linux-installer
+          path: cadt-ui-linux-installer
 
       - name: Download Web artifact
         uses: actions/download-artifact@v3
         with:
-          name: core-registry-cadt-ui-web-build
-          path: core-registry-cadt-ui-web-build
+          name: cadt-ui-web-build
+          path: cadt-ui-web-build
 
       - name: Get Filenames
         run: |
-          DMG_FILE=$(find ${{ github.workspace }}/core-registry-cadt-ui-mac-installer/ -type f -name '*.dmg')
-          DEB_FILE=$(find ${{ github.workspace }}/core-registry-cadt-ui-linux-installer/ -type f -name '*.deb')
-          EXE_FILE=$(find ${{ github.workspace }}/core-registry-cadt-ui-windows-installer/ -type f -name '*.exe')
-          WEB_FILE=$(find ${{ github.workspace }}/core-registry-cadt-ui-web-build/ -type f -name '*.tar.gz')
+          DMG_FILE=$(find ${{ github.workspace }}/cadt-ui-mac-installer/ -type f -name '*.dmg')
+          DEB_FILE=$(find ${{ github.workspace }}/cadt-ui-linux-installer/ -type f -name '*.deb')
+          EXE_FILE=$(find ${{ github.workspace }}/cadt-ui-windows-installer/ -type f -name '*.exe')
+          WEB_FILE=$(find ${{ github.workspace }}/cadt-ui-web-build/ -type f -name '*.tar.gz')
 
           echo "DMG_FILE=$DMG_FILE" >>$GITHUB_ENV
           echo "DEB_FILE=$DEB_FILE" >>$GITHUB_ENV
@@ -242,12 +244,10 @@ jobs:
         run: |
           echo "TAGNAME=$(echo $GITHUB_REF | cut -d / -f 3)" >>$GITHUB_OUTPUT
 
-      - name: Get repo name
-        id: repo-name
-        run: |
-          echo "REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d "/" -f 2)" >>$GITHUB_OUTPUT
+      - name: Gets JWT Token from GitHub
+        uses: Chia-Network/actions/github/jwt@main
 
       - name: Trigger apt repo update
         run: |
-          curl -s -XPOST -H "Authorization: Bearer ${{ secrets.GLUE_ACCESS_TOKEN }}" --data '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"core-registry-cadt-ui\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"false"}' ${{ secrets.GLUE_API_URL }}/api/v1/climate-tokenization/${{ github.sha }}/start
-          curl -s -XPOST -H "Authorization: Bearer ${{ secrets.GLUE_ACCESS_TOKEN }}" --data '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"core-registry-cadt-ui\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"false"}' ${{ secrets.GLUE_API_URL }}/api/v1/climate-tokenization/${{ github.sha }}/success/deploy
+          curl -s -XPOST -H "Authorization: Bearer ${{ env.JWT_TOKEN }}" --data '{"cadt_repo":"cadt-ui","release_version":"${{ steps.tag-name.outputs.TAGNAME }}"}' ${{ secrets.GLUE_API_URL }}/api/v1/cadt/${{ github.sha }}/start
+          curl -s -XPOST -H "Authorization: Bearer ${{ env.JWT_TOKEN }}" --data '{"cadt_repo":"cadt-ui","release_version":"${{ steps.tag-name.outputs.TAGNAME }}"}' ${{ secrets.GLUE_API_URL }}/api/v1/cadt/${{ github.sha }}/success/deploy
