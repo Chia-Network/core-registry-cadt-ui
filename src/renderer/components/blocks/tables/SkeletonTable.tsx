@@ -54,7 +54,7 @@ const SkeletonTable: React.FC = () => {
   );
 
   return (
-    <div className="relative" style={{ height: 'calc(100% - 162px)' }}>
+    <div className="relative h-full">
       <DataTable columns={columns} data={data} isLoading={false} />
     </div>
   );

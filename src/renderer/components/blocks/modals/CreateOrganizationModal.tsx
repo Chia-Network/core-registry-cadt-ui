@@ -1,6 +1,6 @@
 import { Card, CreateOrganizationForm, Modal, Spinner, Tabs } from '@/components';
 import { FormattedMessage } from 'react-intl';
-import { useCreateOrganizationMutation, useImportOrganizationMutation } from '@/api';
+import { CreateOrganizatonParams, useCreateOrganizationMutation, useImportOrganizationMutation } from '@/api';
 import { ImportOrganizationForm } from '@/components/blocks/forms/ImportOrganizationForm';
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'flowbite-react';
@@ -22,8 +22,8 @@ const CreateOrganizationModal: React.FC<CreateOrganizationModalProps> = ({
   const [triggerCreateOrganization, { error: createOrgError }] = useCreateOrganizationMutation();
   const [triggerImportOrganization, { error: importOrgError }] = useImportOrganizationMutation();
 
-  const handleSubmitCreateOrg = async (orgName: string) => {
-    const createOrgResult: any = await triggerCreateOrganization(orgName);
+  const handleSubmitCreateOrg = async (values: CreateOrganizatonParams) => {
+    const createOrgResult: any = await triggerCreateOrganization(values);
     if (createOrgResult?.data.success) {
       onClose();
     } else {

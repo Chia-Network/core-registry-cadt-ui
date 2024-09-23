@@ -12,6 +12,11 @@ interface CreateOrganizationResponse {
   orgId: string;
 }
 
+export interface CreateOrganizatonParams {
+  name: string;
+  prefix: string;
+}
+
 const organizationsApi = cadtApi.injectEndpoints({
   endpoints: (builder) => ({
     getOrganizationsList: builder.query<Organization[], void | null>({
@@ -45,10 +50,11 @@ const organizationsApi = cadtApi.injectEndpoints({
       providesTags: [organizationsTag],
     }),
 
-    createOrganization: builder.mutation<CreateOrganizationResponse, string>({
-      query: (orgName: string) => {
+    createOrganization: builder.mutation<CreateOrganizationResponse, CreateOrganizatonParams>({
+      query: ({ name, prefix }) => {
         const formData: FormData = new FormData();
-        formData.append('name', orgName);
+        formData.append('name', name);
+        formData.append('prefix', prefix);
 
         return {
           url: `/v1/organizations/create`,

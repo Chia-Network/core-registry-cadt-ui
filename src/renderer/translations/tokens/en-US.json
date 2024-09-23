@@ -206,5 +206,8 @@
   "failed-to-commit-project-transfer": "Failed to commit project transfer",
   "no-changes-have-been-made": "No changes have been made",
   "api-host-loaded-from-configuration": "API host loaded from configuration",
-  "not-specified": "not specified"
+  "not-specified": "not specified",
+  "organization-prefix": "Organization Prefix",
+  "name-is-required": "Name is required",
+  "prefix-is-required": "Prefix is required"
 }

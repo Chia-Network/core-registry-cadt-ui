@@ -12,7 +12,7 @@ interface MyOrganizationProps {}
 const MyOrganizationPage: React.FC<MyOrganizationProps> = () => {
   const navigate = useNavigate();
   const { data: organizationsListData, isLoading: organizationsListLoading } = useGetOrganizationsListQuery();
-  const [triggerDeleteOrganization] = useDeleteOrganizationMutation();
+  const [triggerDeleteOrganization, { isLoading: deleteOrganizationLoading }] = useDeleteOrganizationMutation();
   const [triggerEditOrganization] = useEditOrganizationMutation();
   const [editOrganization, setEditOrganization] = useState<boolean>(false);
 
@@ -76,7 +76,13 @@ const MyOrganizationPage: React.FC<MyOrganizationProps> = () => {
               <FiEdit className="text-lime-500" />
             </button>
           ) : (
-            <Button className="ml-2" size="xs" color="failure" onClick={handleDeleteOrganization}>
+            <Button
+              className="ml-2"
+              size="xs"
+              color="failure"
+              onClick={handleDeleteOrganization}
+              isProcessing={deleteOrganizationLoading}
+            >
               <FormattedMessage id="delete-organization" />
             </Button>
           )}
