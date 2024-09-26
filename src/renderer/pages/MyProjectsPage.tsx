@@ -81,9 +81,6 @@ const MyProjectsPage: React.FC = () => {
     return data;
   }, [unprocessedStagedProjects]);
 
-  console.log('staging transfer %%%%%%', processedStagingData.transfer);
-  console.log('imported staging data ^^^^^^^', importedTransferOfferData);
-
   const contentsLoading = useMemo<boolean>(() => {
     return committedDataLoading || stagingDataLoading || importedTransferOfferLoading;
   }, [committedDataLoading, importedTransferOfferLoading, stagingDataLoading]);

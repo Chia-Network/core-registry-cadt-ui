@@ -65,7 +65,7 @@ const OrgUidBadge: React.FC<OrgUidBadgeProps> = ({ orgUid, registryId }) => {
             </div>
             <div className="text-gray-700 text-xs font-mono dark:text-gray-300">
               <p>
-                <FormattedMessage id="Registry" /> ID:
+                <FormattedMessage id="registry" /> ID:
               </p>
             </div>
             {registryId ? (
