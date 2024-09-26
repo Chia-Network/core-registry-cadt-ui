@@ -209,5 +209,6 @@
   "not-specified": "not specified",
   "organization-prefix": "Organization Prefix",
   "name-is-required": "Name is required",
-  "prefix-is-required": "Prefix is required"
+  "prefix-is-required": "Prefix is required",
+  "unable-to-load-staging-data": "Unable to load staging data"
 }
