@@ -1,4 +1,4 @@
-import { isEmpty, omit } from 'lodash';
+import _, { isEmpty, omit } from 'lodash';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import { Issuance } from '@/schemas/Issuance.schema';
 import { useGetProjectQuery } from '@/api';
@@ -55,11 +55,9 @@ const UnitIssuanceForm = forwardRef<UnitIssuanceFormRef, UnitIssuanceFormProps>(
       (value) => {
         setError(null);
         const selectedIssuanceId = value;
-        let foundIssuance = projectData?.issuances?.find((issuance) => issuance.id === selectedIssuanceId);
-        if (foundIssuance) {
-          if (foundIssuance.timeStaged === null) {
-            foundIssuance = { ...foundIssuance, timeStaged: new Date(0) };
-          }
+        const foundIssuance = projectData?.issuances?.find((issuance) => issuance.id === selectedIssuanceId);
+        if (!_.isNil(foundIssuance?.timeStaged)) {
+          delete foundIssuance.timeStaged;
         }
         setSelectedIssuance(foundIssuance);
       },

@@ -10,7 +10,7 @@ export interface Issuance {
   // Optional properties
   id?: string | null;
   warehouseProjectId?: string | null;
-  timeStaged?: Date | null;
+  timeStaged?: Date | EpochTimeStamp | null;
   updatedAt?: Date | null;
   createdAt?: Date | null;
 }

@@ -91,12 +91,14 @@ const SplitUnitForm = forwardRef<SplitUnitFormRef, SplitUnitFormProps>(({ pickli
                   <Field
                     name={`${name}[${index}].unitBlockStart`}
                     required={true}
+                    readonly={true}
                     label={intl.formatMessage({ id: 'unit-block-start' })}
                     type="text"
                   />
                   <Field
                     name={`${name}[${index}].unitBlockEnd`}
                     required={true}
+                    readonly={true}
                     label={intl.formatMessage({ id: 'unit-block-end' })}
                     type="text"
                   />

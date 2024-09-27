@@ -43,8 +43,6 @@ function removeNullFields(obj) {
 
 const validationSchema = yup.object({
   unitOwner: yup.string(),
-  unitBlockStart: yup.string().required('Unit Block Start is required'),
-  unitBlockEnd: yup.string().required('Unit Block End is required'),
   unitCount: yup.number().required('Unit Count is required').positive('Unit Count must be positive'),
   countryJurisdictionOfOwner: yup.string().required('Country Jurisdiction Of Owner is required'),
   inCountryJurisdictionOfOwner: yup.string().required('In-Country Jurisdiction Of Owner is required'),
@@ -198,24 +196,6 @@ const UnitForm = forwardRef<UnitFormRef, UnitFormProps>(({ readonly = false, dat
                   readonly={readonly}
                   initialValue={unit?.unitOwner || ''}
                 />
-                <Field
-                  name="unitBlockStart"
-                  label={intl.formatMessage({ id: 'unit-block-start' })}
-                  type="text"
-                  readonly={readonly}
-                  required={true}
-                  initialValue={unit?.unitBlockStart || ''}
-                />
-
-                <Field
-                  name="unitBlockEnd"
-                  label={intl.formatMessage({ id: 'unit-block-end' })}
-                  type="text"
-                  readonly={readonly}
-                  required={true}
-                  initialValue={unit?.unitBlockEnd || ''}
-                />
-
                 <Field
                   name="unitCount"
                   label={intl.formatMessage({ id: 'unit-count' })}
