@@ -31,8 +31,6 @@ export interface Unit {
 export interface UnitSplit {
   unitCount: number | null;
   unitOwner: string | null;
-  unitBlockStart: string | null;
-  unitBlockEnd: string | null;
   countryJurisdictionOfOwner: string | null;
   inCountryJurisdictionOfOwner: string | null;
 }
