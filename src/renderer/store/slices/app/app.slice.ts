@@ -25,10 +25,14 @@ export const appSlice = createSlice({
     toggleThemeMode: (state) => {
       state.isDarkTheme = !state.isDarkTheme;
     },
+    setIsCoreRegistryUiApp: (state, { payload }: { payload: { isCoreRegistryUiApp: boolean } }) => {
+      state.isCoreRegistryUiApp = payload.isCoreRegistryUiApp;
+    },
   },
 });
 
-export const { setLocale, setHost, resetApiHost, setConfigFileLoaded, toggleThemeMode } = appSlice.actions;
+export const { setLocale, setHost, resetApiHost, setConfigFileLoaded, toggleThemeMode, setIsCoreRegistryUiApp } =
+  appSlice.actions;
 
 export const selectCurrentHost = (state) => state.app.host;
 
