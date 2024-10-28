@@ -3,11 +3,15 @@ import { BrowserRouter as Router, Navigate, redirect, Route, Routes } from 'reac
 import ROUTES from '@/routes/route-constants';
 import * as Pages from '@/pages';
 import { Template } from '@/components';
+import { coreRegistryUiBaseName } from '@/utils/unified-ui-utils';
 
 const AppNavigator: React.FC = () => {
+  // see https://github.com/Chia-Network/core-registry-ui for basename use case
+  const basename = coreRegistryUiBaseName();
+
   return (
     <>
-      <Router>
+      <Router basename={basename}>
         <Routes>
           <Route // remove trailing slash
             path="*(/+)"

@@ -4,18 +4,25 @@ import { IntlProvider } from 'react-intl';
 import { loadLocaleData } from '@/translations';
 import '@/App.css';
 import { AppNavigator } from '@/routes';
-import { resetApiHost, setConfigFileLoaded, setHost, setLocale } from '@/store/slices/app';
+import { resetApiHost, setConfigLoaded, setHost, setLocale } from '@/store/slices/app';
 import { ComponentCenteredSpinner } from '@/components';
-import { Config, useGetThemeColorsQuery, useGetUiConfigQuery } from '@/api';
-import { coreRegistryUiBaseName, notifyParentOfAppLoad } from '@/utils/iframe-utils';
+import { useGetThemeColorsQuery, useGetUiConfigQuery } from '@/api';
+import {
+  coreRegistryUiBaseName,
+  getParentSettings,
+  notifyParentOfAppLoad,
+  ParentSettings,
+} from '@/utils/unified-ui-utils';
 
 /**
  * @returns app react component to be rendered by electron as the UI
  */
 function App() {
   const isCoreRegistryUiChildApp = Boolean(coreRegistryUiBaseName());
+  let settingsFromParentApp: ParentSettings | null = null;
   if (isCoreRegistryUiChildApp) {
     notifyParentOfAppLoad();
+    settingsFromParentApp = getParentSettings();
   }
 
   const dispatch = useDispatch();
@@ -36,15 +43,17 @@ function App() {
     });
   };
 
-  const setConfig = (config: Config | undefined) => {
-    if (config) {
-      if (config?.apiHost) {
-        dispatch(setHost({ apiHost: config.apiHost }));
+  const setConfig = ({ apiHost, apiKey }: { apiHost: string; apiKey?: string }) => {
+    if (apiHost) {
+      if (apiKey) {
+        dispatch(setHost({ apiHost, apiKey }));
+      } else {
+        dispatch(setHost({ apiHost }));
       }
-      dispatch(setConfigFileLoaded({ configFileLoaded: true }));
+      dispatch(setConfigLoaded({ configLoaded: true }));
     } else if (appStore.configFileLoaded) {
       dispatch(resetApiHost());
-      dispatch(setConfigFileLoaded({ configFileLoaded: false }));
+      dispatch(setConfigLoaded({ configLoaded: false }));
     }
   };
 
@@ -67,37 +76,47 @@ function App() {
     }
   }, [fetchedThemeColors, isCoreRegistryUiChildApp]);
 
-  // handle setting the config when fetched as standalone app
-  useEffect(() => {
-    if (!configFileLoading && !isCoreRegistryUiChildApp) {
-      setConfig(fetchedConfig);
-    }
-  }, [configFileLoading, fetchedConfig]);
-
   /*
    2 different loading scenarios:
    - as a stand-alone app fetching files
-   - as a child app waiting for connection settings from its parent. in this case the config file is ignored
-   the below logic has been nested to represent the two cases
+   - as a child app getting connection settings from parent local storage. in this case the config file is ignored
    */
+
+  // handle setting the config when fetched as standalone app
+  useEffect(() => {
+    if (!configFileLoading && fetchedConfig?.apiHost && !isCoreRegistryUiChildApp) {
+      setConfig({ apiHost: fetchedConfig?.apiHost });
+    }
+  }, [configFileLoading, fetchedConfig /* do not add setConfig */]);
+
+  //handle setting theme colors when loaded as child app
+  useEffect(() => {
+    if (isCoreRegistryUiChildApp && settingsFromParentApp?.colors) {
+      setThemeColors(settingsFromParentApp.colors);
+    }
+  }, [isCoreRegistryUiChildApp, settingsFromParentApp?.colors]);
+
+  //handle setting config when loaded as child app
+  useEffect(() => {
+    if (isCoreRegistryUiChildApp && settingsFromParentApp?.apiHost) {
+      setConfig({ apiHost: settingsFromParentApp?.apiHost, apiKey: settingsFromParentApp.apiKey });
+    }
+  }, [
+    isCoreRegistryUiChildApp,
+    settingsFromParentApp?.apiHost,
+    settingsFromParentApp?.apiKey,
+    /* do not add setConfig */
+  ]);
 
   useEffect(() => {
     // give the setConfigFileLoaded action time to dispatch
-    if (isCoreRegistryUiChildApp) {
-      console.log('todo: child app loading conditions here');
-    } else {
-      if (!configFileLoading) {
-        setTimeout(() => setAppLoading(false), 400);
-      }
+    if (!configFileLoading || isCoreRegistryUiChildApp) {
+      setTimeout(() => setAppLoading(false), 400);
     }
   }, [configFileLoading, isCoreRegistryUiChildApp]);
 
-  if (isCoreRegistryUiChildApp) {
-    console.log('todo: child app loading conditions here');
-  } else {
-    if (!translationTokens || configFileLoading || themeColorsFileLoading || appLoading) {
-      return <ComponentCenteredSpinner />;
-    }
+  if (!translationTokens || configFileLoading || themeColorsFileLoading || appLoading) {
+    return <ComponentCenteredSpinner />;
   }
 
   return (
