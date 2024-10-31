@@ -4,21 +4,17 @@ import { IntlProvider } from 'react-intl';
 import { loadLocaleData } from '@/translations';
 import '@/App.css';
 import { AppNavigator } from '@/routes';
-import { resetApiHost, setConfigLoaded, setHost, setLocale } from '@/store/slices/app';
+import { resetApiHost, setConfigLoaded, setHost, setIsCoreRegistryUiApp, setLocale } from '@/store/slices/app';
 import { ComponentCenteredSpinner } from '@/components';
 import { useGetThemeColorsQuery, useGetUiConfigQuery } from '@/api';
-import {
-  coreRegistryUiBaseName,
-  getParentSettings,
-  notifyParentOfAppLoad,
-  ParentSettings,
-} from '@/utils/unified-ui-utils';
+import { getParentSettings, isIframe, notifyParentOfAppLoad, ParentSettings } from '@/utils/unified-ui-utils';
 
 /**
  * @returns app react component to be rendered by electron as the UI
  */
 function App() {
-  const isCoreRegistryUiChildApp = Boolean(coreRegistryUiBaseName());
+  const isCoreRegistryUiChildApp = Boolean(isIframe());
+  console.log('^^^^^^^^ cadt is child app', isCoreRegistryUiChildApp);
   let settingsFromParentApp: ParentSettings | null = null;
   if (isCoreRegistryUiChildApp) {
     notifyParentOfAppLoad();
@@ -35,6 +31,10 @@ function App() {
   const { data: fetchedThemeColors, isLoading: themeColorsFileLoading } = useGetThemeColorsQuery(undefined, {
     skip: isCoreRegistryUiChildApp,
   });
+
+  if (isCoreRegistryUiChildApp !== appStore.isCoreRegistryUiApp) {
+    dispatch(setIsCoreRegistryUiApp({ isCoreRegistryUiApp: isCoreRegistryUiChildApp }));
+  }
 
   const setThemeColors = (colors: any) => {
     // apply loaded theme colors via changing css property values (see App.css)

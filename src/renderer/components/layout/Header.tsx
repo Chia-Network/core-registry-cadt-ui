@@ -7,8 +7,13 @@ const Header: React.FC = () => {
   const appStore = useSelector((state: RootState) => state.app);
 
   if (appStore.isCoreRegistryUiApp) {
-    // if running as a child app, the parent app provides the header. render nothing
-    return null;
+    // if running as a child app, the parent app provides the header.
+    // return hidden connect button to show connect message if unable to connect
+    return (
+      <div className="hidden">
+        <ConnectButton />
+      </div>
+    );
   }
 
   return (

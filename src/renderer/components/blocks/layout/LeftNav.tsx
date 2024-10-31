@@ -10,32 +10,28 @@ import { Organization } from '@/schemas/Organization.schema';
 import { useUrlHash } from '@/hooks';
 import { useDispatch } from 'react-redux';
 import { organizationsTag } from '@/api/cadt/v1';
+import { isIframe } from '@/utils/unified-ui-utils';
 
 const LeftNav = () => {
+  const isCoreRegistryUiChildApp = isIframe();
+  const savedUrlString = localStorage.getItem('cadtUiLocation');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [myOrganization, setMyOrganization] = useState<Organization | undefined>(undefined);
   const [orgCreationPending, setOrgCreationPending] = useState<boolean>(false);
-  const { data: serverHealth, isLoading: isServerHealthLoading } = useGetHealthQuery({});
-
   const [createOrgModalActive, setCreateOrgModalActive] = useUrlHash('create-organization');
+
+  const { data: serverHealth, isLoading: isServerHealthLoading } = useGetHealthQuery({});
   const getOrgRtkQueryOptions = myOrganization || createOrgModalActive ? {} : { pollingInterval: 10000 };
   const { data: organizationsListData, isLoading: organizationsListLoading } = useGetOrganizationsListQuery(
     null,
     getOrgRtkQueryOptions,
   );
 
-  useEffect(() => {
-    setMyOrganization(organizationsListData?.find((org: Organization) => org.isHome));
-    if (orgCreationPending && myOrganization?.orgUid !== 'PENDING') {
-      dispatch(invalidateOrgApiTag([organizationsTag]));
-    }
-    setOrgCreationPending(myOrganization?.orgUid === 'PENDING');
-  }, [dispatch, myOrganization?.orgUid, orgCreationPending, organizationsListData]);
-
   const isActive = useCallback((path: string) => location.pathname === path, [location]);
+
   const handleClickMyOrganization = useCallback(() => {
     if (myOrganization && !orgCreationPending) {
       navigate(ROUTES.MY_ORGANIZATION);
@@ -50,6 +46,41 @@ const LeftNav = () => {
     navigate(path);
     setIsOpen(false); // Close the menu after navigation
   };
+
+  useEffect(() => {
+    setMyOrganization(organizationsListData?.find((org: Organization) => org.isHome));
+    if (orgCreationPending && myOrganization?.orgUid !== 'PENDING') {
+      dispatch(invalidateOrgApiTag([organizationsTag]));
+    }
+    setOrgCreationPending(myOrganization?.orgUid === 'PENDING');
+  }, [dispatch, myOrganization?.orgUid, orgCreationPending, organizationsListData]);
+
+  //navigate to the last location saved to local storage
+  useEffect(
+    () => {
+      if (savedUrlString) {
+        console.log('@@@@@@ navigating to ', savedUrlString);
+        //navigate(savedUrlString, { replace: true });
+      }
+    },
+    [
+      /* empty dependencies to only run on component mount (app load) */
+    ],
+  );
+
+  // save the current location to local storage for recall when the parent app refreshes
+  useEffect(() => {
+    console.log(window.location.href);
+    if (/* todo isCoreRegistryUiChildApp && */ location) {
+      const reactAppCurrentLocation: string = location.pathname + location.search + location.hash;
+      console.log('##########', reactAppCurrentLocation);
+
+      if (savedUrlString && reactAppCurrentLocation !== '/' && reactAppCurrentLocation !== savedUrlString) {
+        console.log('saving to local storage', reactAppCurrentLocation);
+        localStorage.setItem('cadtUiLocation', reactAppCurrentLocation);
+      }
+    }
+  }, [isCoreRegistryUiChildApp, location.pathname, location.search, location.hash, savedUrlString]);
 
   return (
     <div className="h-full relative bg-white dark:bg-gray-800">

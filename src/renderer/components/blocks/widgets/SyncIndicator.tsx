@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { projectsTag, stagedProjectsTag, stagedUnitsTag, unitsTag } from '@/api/cadt/v1';
+import { reloadApplication } from '@/utils/unified-ui-utils';
 
 interface SyncIndicatorProps {
   detailed: boolean;
@@ -82,7 +83,7 @@ const SyncIndicator: React.FC<SyncIndicatorProps> = ({ detailed, orgUid }) => {
 
   const handleRefreshClick = () => {
     // Trigger hard refresh of the app here
-    window.location.reload();
+    reloadApplication();
   };
 
   return (

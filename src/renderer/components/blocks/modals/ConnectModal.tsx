@@ -9,6 +9,7 @@ import { useUrlHash } from '@/hooks';
 // @ts-ignore
 import { BaseQueryResult, FetchBaseQueryError, SerializedError } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { RootState } from '@/store';
+import { reloadApplication } from '@/utils/unified-ui-utils';
 
 interface ConnectModalProps {
   onClose: () => void;
@@ -31,7 +32,7 @@ const ConnectModal: React.FC<ConnectModalProps> = ({ onClose }: ConnectModalProp
 
     dispatch(setHost({ apiHost, apiKey }));
     setActive(false);
-    setTimeout(() => window.location.reload(), 0);
+    setTimeout(() => reloadApplication(), 0);
     onClose();
   };
 

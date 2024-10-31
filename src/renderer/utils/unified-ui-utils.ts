@@ -11,16 +11,13 @@ export interface ParentSettings {
   apiKey?: string;
 }
 
-export const coreRegistryUiBaseName = () => {
-  const isInIframe = window.self !== window.top;
-  const basenameInLocalStorage = localStorage.getItem('cadtChildUiBasename');
-  return basenameInLocalStorage && isInIframe ? basenameInLocalStorage : '';
+export const isIframe = () => {
+  return window.self !== window.top;
 };
 
 export const notifyParentOfAppLoad = () => {
-  const childAppOrigin = window.location.origin;
   // this child app and the parent should have the same origin
-  window.parent.postMessage('childAppLoaded', childAppOrigin);
+  window.parent.postMessage('childAppLoaded', window.location.origin);
 };
 
 export const getParentSettings = (): ParentSettings => {
@@ -40,5 +37,17 @@ export const getParentSettings = (): ParentSettings => {
   } catch {
     console.error('error retrieving settings from parent local storage');
     return {};
+  }
+};
+
+/**
+ * this should be called instead of window.location.reload() in all cases.
+ * window.location.reload() when running as a child app will cause problems
+ */
+export const reloadApplication = () => {
+  if (isIframe()) {
+    window.parent.postMessage('reload', window.location.origin);
+  } else {
+    window.location.reload();
   }
 };
