@@ -1,3 +1,5 @@
+import ROUTES from '@/routes/route-constants';
+
 /*
   this app can be run as a child application of the unified 'core-registry-ui' application
   these functions provide functionality for managing app behavior when run as a child app
@@ -49,5 +51,39 @@ export const reloadApplication = () => {
     window.parent.postMessage('reload', window.location.origin);
   } else {
     window.location.reload();
+  }
+};
+
+/**
+ * to be run prior to the react app routing context loading. if the url is populated with an app location,
+ * query parameters, or a hash, then the user likely entered a deeplinked URL.
+ *
+ * this function determines if the location entered by the user was intentional or if this was a parent app refresh,
+ * which tells the app whether the last saved location should be loaded or not.
+ *
+ * if the app is stand-alone application, there should not be a saved location. it will always be cleared.
+ */
+export const reconcileSavedUrl = () => {
+  const lastSavedLocation = localStorage.getItem('cadtUiLocation');
+
+  /*
+  if (!isIframe() && lastSavedLocation) {
+    localStorage.removeItem('cadtUiLocation');
+    return;
+  }
+
+   */
+
+  const url = new URL(window.location.href);
+  const possibleAppRoute = '/' + url.pathname.split('/').pop();
+  const urlHasAppRoute = Object.keys(ROUTES)
+    .map((routeKey) => ROUTES[routeKey])
+    .includes(possibleAppRoute);
+  console.log('%%%%%%', possibleAppRoute, 'is route', urlHasAppRoute);
+
+  const clearLastSavedLocation = urlHasAppRoute || url.hash || url.search;
+  if (lastSavedLocation && clearLastSavedLocation) {
+    console.log('clearing last saved location');
+    localStorage.removeItem('cadtUiLocation');
   }
 };

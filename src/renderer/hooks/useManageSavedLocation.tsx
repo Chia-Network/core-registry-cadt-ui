@@ -1,0 +1,48 @@
+import { useEffect, useState } from 'react';
+import { isIframe } from '@/utils/unified-ui-utils';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+/**
+ * MUST be run in a react router context
+ * hook to manage loading the last saved location when running as a child application.
+ */
+const useManageSavedLocation = () => {
+  const isCoreRegistryUiChildApp = isIframe();
+  const savedUrlString = localStorage.getItem('cadtUiLocation');
+  const [savedUrlLoaded, setSavedUrlLoaded] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  //navigate to the last location saved to local storage
+  useEffect(() => {
+    console.log('loaded saved URL string', savedUrlString);
+    if (isCoreRegistryUiChildApp && !savedUrlLoaded && savedUrlString) {
+      console.log('@@@@@@ navigating to ', savedUrlString);
+      navigate(savedUrlString, { replace: true });
+    }
+    setTimeout(() => setSavedUrlLoaded(true), 200);
+  }, [isCoreRegistryUiChildApp, navigate, savedUrlLoaded, savedUrlString]);
+
+  // save the current location to local storage for recall when the parent app refreshes
+  useEffect(() => {
+    if (isCoreRegistryUiChildApp && location && savedUrlLoaded) {
+      const reactAppCurrentLocation: string = location.pathname + location.hash + location.search;
+      console.log('##########', reactAppCurrentLocation);
+
+      if (reactAppCurrentLocation !== '/' && reactAppCurrentLocation !== savedUrlString) {
+        console.log('saving to local storage', reactAppCurrentLocation);
+        localStorage.setItem('cadtUiLocation', reactAppCurrentLocation);
+      }
+    }
+  }, [
+    isCoreRegistryUiChildApp,
+    location.pathname,
+    location.search,
+    location.hash,
+    savedUrlString,
+    location,
+    savedUrlLoaded,
+  ]);
+};
+
+export { useManageSavedLocation };

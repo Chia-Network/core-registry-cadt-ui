@@ -7,7 +7,13 @@ import { AppNavigator } from '@/routes';
 import { resetApiHost, setConfigLoaded, setHost, setIsCoreRegistryUiApp, setLocale } from '@/store/slices/app';
 import { ComponentCenteredSpinner } from '@/components';
 import { useGetThemeColorsQuery, useGetUiConfigQuery } from '@/api';
-import { getParentSettings, isIframe, notifyParentOfAppLoad, ParentSettings } from '@/utils/unified-ui-utils';
+import {
+  getParentSettings,
+  isIframe,
+  notifyParentOfAppLoad,
+  ParentSettings,
+  reconcileSavedUrl,
+} from '@/utils/unified-ui-utils';
 
 /**
  * @returns app react component to be rendered by electron as the UI
@@ -20,6 +26,8 @@ function App() {
     notifyParentOfAppLoad();
     settingsFromParentApp = getParentSettings();
   }
+
+  reconcileSavedUrl();
 
   const dispatch = useDispatch();
   const appStore = useSelector((state: any) => state.app);
