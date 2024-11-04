@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom'; // Define a TypeScript interface for the function's return type
+import { useLocation } from 'react-router-dom';
 
 // Define a TypeScript interface for the function's return type
 interface QueryParamState<T> {

@@ -66,20 +66,18 @@ export const reloadApplication = () => {
 export const reconcileSavedUrl = () => {
   const lastSavedLocation = localStorage.getItem('cadtUiLocation');
 
-  /*
-  if (!isIframe() && lastSavedLocation) {
-    localStorage.removeItem('cadtUiLocation');
+  if (!isIframe()) {
+    if (lastSavedLocation) {
+      localStorage.removeItem('cadtUiLocation');
+    }
     return;
   }
-
-   */
 
   const url = new URL(window.location.href);
   const possibleAppRoute = '/' + url.pathname.split('/').pop();
   const urlHasAppRoute = Object.keys(ROUTES)
     .map((routeKey) => ROUTES[routeKey])
     .includes(possibleAppRoute);
-  console.log('%%%%%%', possibleAppRoute, 'is route', urlHasAppRoute);
 
   const clearLastSavedLocation = urlHasAppRoute || url.hash || url.search;
   if (lastSavedLocation && clearLastSavedLocation) {
