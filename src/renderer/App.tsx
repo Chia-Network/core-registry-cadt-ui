@@ -20,7 +20,6 @@ import {
  */
 function App() {
   const isCoreRegistryUiChildApp = Boolean(isIframe());
-  console.log('^^^^^^^^ cadt is child app', isCoreRegistryUiChildApp);
   let settingsFromParentApp: ParentSettings | null = null;
   if (isCoreRegistryUiChildApp) {
     notifyParentOfAppLoad();
@@ -67,15 +66,33 @@ function App() {
 
   useEffect(() => {
     if (appStore.locale) {
-      const processTranslationTokens = async () => {
-        setTranslationTokens(await loadLocaleData(appStore.locale));
-      };
-
-      processTranslationTokens();
+      setTranslationTokens(loadLocaleData(appStore.locale));
     } else {
       dispatch(setLocale(navigator.language));
     }
   }, [appStore.locale, dispatch]);
+
+  // handle messages from parent
+  useEffect(() => {
+    const parentAppMessageListener = (event: MessageEvent) => {
+      if (event.origin === window.origin) {
+        const message = event.data;
+        if (message?.selectedLocale && message.selectedLocale !== appStore.locale) {
+          dispatch(setLocale(message.selectedLocale));
+        }
+      }
+    };
+
+    window.addEventListener('message', parentAppMessageListener);
+
+    return () => window.removeEventListener('message', parentAppMessageListener);
+  }, [appStore.locale, dispatch]);
+
+  /*
+   2 different loading scenarios:
+   - as a stand-alone app fetching files
+   - as a child app getting connection settings from parent local storage. in this case the config file is ignored
+   */
 
   // handle setting the theme colors when fetched as standalone app
   useEffect(() => {
@@ -83,12 +100,6 @@ function App() {
       setThemeColors(fetchedThemeColors);
     }
   }, [fetchedThemeColors, isCoreRegistryUiChildApp]);
-
-  /*
-   2 different loading scenarios:
-   - as a stand-alone app fetching files
-   - as a child app getting connection settings from parent local storage. in this case the config file is ignored
-   */
 
   // handle setting the config when fetched as standalone app
   useEffect(() => {

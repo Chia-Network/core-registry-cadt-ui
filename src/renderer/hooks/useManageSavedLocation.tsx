@@ -15,9 +15,7 @@ const useManageSavedLocation = () => {
 
   //navigate to the last location saved to local storage
   useEffect(() => {
-    console.log('loaded saved URL string', savedUrlString);
     if (isCoreRegistryUiChildApp && !savedUrlLoaded && savedUrlString) {
-      console.log('@@@@@@ navigating to ', savedUrlString);
       navigate(savedUrlString, { replace: true });
     }
     setTimeout(() => setSavedUrlLoaded(true), 200);
@@ -27,10 +25,8 @@ const useManageSavedLocation = () => {
   useEffect(() => {
     if (isCoreRegistryUiChildApp && location && savedUrlLoaded) {
       const reactAppCurrentLocation: string = location.pathname + location.hash + location.search;
-      console.log('##########', reactAppCurrentLocation);
 
       if (reactAppCurrentLocation !== '/' && reactAppCurrentLocation !== savedUrlString) {
-        console.log('saving to local storage', reactAppCurrentLocation);
         localStorage.setItem('cadtUiLocation', reactAppCurrentLocation);
       }
     }

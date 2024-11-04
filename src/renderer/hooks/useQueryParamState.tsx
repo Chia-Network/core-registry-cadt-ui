@@ -41,9 +41,9 @@ const useQueryParamState: QueryParamState<string> = (name, defaultValue = '') =>
   // Ensure default value is set in URL on initial mount if it's missing
   useEffect(() => {
     setTimeout(() => {
+      // delay setting the default value to give the last saved location time to load if needed
       const params = new URLSearchParams(window.location.search || window.location.hash.replace(/#.*\?/, ''));
       if (!params.has(name) && defaultValue) {
-        console.log('!!!!!!', params, defaultValue);
         setQueryStringParameter(defaultValue);
       }
     }, 300);
