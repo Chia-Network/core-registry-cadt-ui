@@ -81,7 +81,6 @@ export const reconcileSavedUrl = () => {
 
   const clearLastSavedLocation = urlHasAppRoute || url.hash || url.search;
   if (lastSavedLocation && clearLastSavedLocation) {
-    console.log('clearing last saved location');
     localStorage.removeItem('cadtUiLocation');
   }
 };
