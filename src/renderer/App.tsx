@@ -19,7 +19,7 @@ import {
  * @returns app react component to be rendered by electron as the UI
  */
 function App() {
-  const isCoreRegistryUiChildApp = Boolean(isIframe());
+  const isCoreRegistryUiChildApp = isIframe();
   let settingsFromParentApp: ParentSettings | null = null;
   if (isCoreRegistryUiChildApp) {
     notifyParentOfAppLoad();
