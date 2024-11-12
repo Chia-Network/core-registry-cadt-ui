@@ -18,14 +18,31 @@ const LeftNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [myOrganization, setMyOrganization] = useState<Organization | undefined>(undefined);
   const [orgCreationPending, setOrgCreationPending] = useState<boolean>(false);
-  const { data: serverHealth, isLoading: isServerHealthLoading } = useGetHealthQuery({});
-
   const [createOrgModalActive, setCreateOrgModalActive] = useUrlHash('create-organization');
+
+  const { data: serverHealth, isLoading: isServerHealthLoading } = useGetHealthQuery({});
   const getOrgRtkQueryOptions = myOrganization || createOrgModalActive ? {} : { pollingInterval: 10000 };
   const { data: organizationsListData, isLoading: organizationsListLoading } = useGetOrganizationsListQuery(
     null,
     getOrgRtkQueryOptions,
   );
+
+  const isActive = useCallback((path: string) => location.pathname === path, [location]);
+
+  const handleClickMyOrganization = useCallback(() => {
+    if (myOrganization && !orgCreationPending && !isActive(ROUTES.MY_ORGANIZATION)) {
+      navigate(ROUTES.MY_ORGANIZATION);
+    } else {
+      setCreateOrgModalActive(true);
+    }
+  }, [isActive, myOrganization, navigate, orgCreationPending, setCreateOrgModalActive]);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsOpen(false); // Close the menu after navigation
+  };
 
   useEffect(() => {
     setMyOrganization(organizationsListData?.find((org: Organization) => org.isHome));
@@ -34,22 +51,6 @@ const LeftNav = () => {
     }
     setOrgCreationPending(myOrganization?.orgUid === 'PENDING');
   }, [dispatch, myOrganization?.orgUid, orgCreationPending, organizationsListData]);
-
-  const isActive = useCallback((path: string) => location.pathname === path, [location]);
-  const handleClickMyOrganization = useCallback(() => {
-    if (myOrganization && !orgCreationPending) {
-      navigate(ROUTES.MY_ORGANIZATION);
-    } else {
-      setCreateOrgModalActive(true);
-    }
-  }, [myOrganization, navigate, orgCreationPending, setCreateOrgModalActive]);
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    setIsOpen(false); // Close the menu after navigation
-  };
 
   return (
     <div className="h-full relative bg-white dark:bg-gray-800">
@@ -111,28 +112,28 @@ const LeftNav = () => {
               <Sidebar.Item
                 style={{ cursor: 'pointer' }}
                 active={isActive(ROUTES.PROJECTS_LIST)}
-                onClick={() => navigate(ROUTES.PROJECTS_LIST)}
+                onClick={() => !isActive(ROUTES.PROJECTS_LIST) && navigate(ROUTES.PROJECTS_LIST)}
               >
                 <FormattedMessage id="projects-list" />
               </Sidebar.Item>
               <Sidebar.Item
                 style={{ cursor: 'pointer' }}
                 active={isActive(ROUTES.UNITS_LIST)}
-                onClick={() => navigate(ROUTES.UNITS_LIST)}
+                onClick={() => !isActive(ROUTES.UNITS_LIST) && navigate(ROUTES.UNITS_LIST)}
               >
                 <FormattedMessage id="units-list" />
               </Sidebar.Item>
               <Sidebar.Item
                 style={{ cursor: 'pointer' }}
                 active={isActive(ROUTES.AUDIT)}
-                onClick={() => navigate(ROUTES.AUDIT)}
+                onClick={() => !isActive(ROUTES.AUDIT) && navigate(ROUTES.AUDIT)}
               >
                 <FormattedMessage id="audit" />
               </Sidebar.Item>
               <Sidebar.Item
                 style={{ cursor: 'pointer' }}
                 active={isActive(ROUTES.GLOSSARY)}
-                onClick={() => navigate(ROUTES.GLOSSARY)}
+                onClick={() => !isActive(ROUTES.GLOSSARY) && navigate(ROUTES.GLOSSARY)}
               >
                 <FormattedMessage id="glossary" />
               </Sidebar.Item>
@@ -173,14 +174,14 @@ const LeftNav = () => {
                     <Sidebar.Item
                       style={{ cursor: 'pointer' }}
                       active={isActive(ROUTES.MY_PROJECTS)}
-                      onClick={() => navigate(ROUTES.MY_PROJECTS)}
+                      onClick={() => !isActive(ROUTES.MY_PROJECTS) && navigate(ROUTES.MY_PROJECTS)}
                     >
                       <FormattedMessage id="my-projects" />
                     </Sidebar.Item>
                     <Sidebar.Item
                       style={{ cursor: 'pointer' }}
                       active={isActive(ROUTES.MY_UNITS_LIST)}
-                      onClick={() => navigate(ROUTES.MY_UNITS_LIST)}
+                      onClick={() => !isActive(ROUTES.MY_UNITS_LIST) && navigate(ROUTES.MY_UNITS_LIST)}
                     >
                       <FormattedMessage id="my-units" />
                     </Sidebar.Item>
