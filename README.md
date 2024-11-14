@@ -1,7 +1,7 @@
 # Climate Action Data Trust User Interface
 
 This repository provides a graphical user interface (UI) for
-the [Climate Action Data Trust (CADT)](https://github.com/Chia-Network/cadt) application. CADT interfaces with the Chia
+the [Climate Action Data Trust (CADT)](https://github.com/Chia-Network/core-registry-cadt) application. CADT interfaces with the Chia
 Blockchain software and provides and API for entering and retrieving carbon data. This UI is a javascript application
 that connects to the CADT API for a convenient way to access the data.
 
@@ -16,7 +16,7 @@ work on ARM.
 
 ### Desktop Applications
 
-The [releases](https://github.com/Chia-Network/cadt-ui/releases) page provides desktop applications packaged for
+The [releases](https://github.com/Chia-Network/core-registry-cadt-ui/releases) page provides desktop applications packaged for
 Windows, Mac, and Debian-based Linux distributions.
 
 #### Ubuntu Desktop via Apt
@@ -30,7 +30,7 @@ sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg
 ```
 
-2. Add Chia's official GPG Key (if you have installed Chia or [CADT](https://github.com/Chia-Network/cadt) with `apt`,
+2. Add Chia's official GPG Key (if you have installed Chia or [CADT](https://github.com/Chia-Network/core-registry-cadt) with `apt`,
    you'll have this key already and will get a message about overwriting the existing key, which is safe to do):
 
 ```
@@ -100,7 +100,7 @@ server {
 contributing code to the application*
 
 ```
-git clone git@github.com:Chia-Network/cadt-ui.git
+git clone git@github.com:Chia-Network/core-registry-cadt-ui.git
 cd cadt-ui
 nvm install
 nvm use

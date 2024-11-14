@@ -1,12 +1,12 @@
 {
-  "name": "cadt-ui",
+  "name": "core-registry-cadt-ui",
   "private": true,
-  "version": "2.0.3",
+  "version": "2.0.0",
   "type": "module",
   "main": "build/main.js",
   "engineStrict": true,
   "author": "Chia Network Inc. <hello@chia.net>",
-  "description": "Climate Action Data Trust User Interface",
+  "description": "Core Registry Climate Action Data Trust User Interface",
   "engines": {
     "node": ">=20.16"
   },
@@ -98,8 +98,8 @@
     "*.+(js|ts|tsx)": "npm run lint:prettier-eslint"
   },
   "build": {
-    "appId": "org.worldbank.climate-action-data-trust",
-    "productName": "cadt-ui",
+    "appId": "org.chia.core-registry-climate-action-data-trust-ui",
+    "productName": "core-registry-cadt-ui",
     "files": [
       "build/renderer/**/*",
       "build/**/*",
@@ -125,9 +125,9 @@
     },
     "linux": {
       "target": "deb",
-      "description": "Climate Action Data Trust User Interface",
+      "description": "Core Registry Climate Action Data Trust User Interface",
       "maintainer": "Chia Network Inc. <hello@chia.net>",
-      "vendor": "https://climateactiondata.org/",
+      "vendor": "https://www.chia.net/",
       "publish": null,
       "icon": "src/assets/img/CADT_Icon.png",
       "desktop": {
