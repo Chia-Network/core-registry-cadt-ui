@@ -12,14 +12,14 @@ concurrency:
 
 jobs:
   check-version:
-    name: Tag and Create Changelog
+    name: Check version increment
     runs-on: ubuntu-latest
     steps:
       - name: Clean workspace
         uses: Chia-Network/actions/clean-workspace@main
 
       - name: Checkout current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # Need PACKAGE_ADMIN_PAT token so when the tag is created, the tag automation runs
           token: ${{ secrets.PACKAGE_ADMIN_PAT }}
@@ -46,7 +46,7 @@ jobs:
             git add CHANGELOG.md
             sed -i -e '/<s>/d' CHANGELOG.md
             git commit -m "Updating changelog for $version"
-            git tag $version -m "Release $version \n$changes"
+            git tag $version -m "Release $version  $changes"
             git push origin $version
             git push origin main
           fi
