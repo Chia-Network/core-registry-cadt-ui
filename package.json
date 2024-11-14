@@ -98,7 +98,7 @@
     "*.+(js|ts|tsx)": "npm run lint:prettier-eslint"
   },
   "build": {
-    "appId": "org.chia.core-registry-climate-action-data-trust",
+    "appId": "org.chia.core-registry-climate-action-data-trust-ui",
     "productName": "core-registry-cadt-ui",
     "files": [
       "build/renderer/**/*",
