@@ -5,7 +5,7 @@ on:
     tags:
       - '**'
     branches:
-      - refactor/refactor-base #remove this once rebuild is merged
+      - develop
   pull_request:
     branches:
       - '**'
