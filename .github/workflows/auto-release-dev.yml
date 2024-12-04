@@ -42,7 +42,7 @@ jobs:
           if [ $(git tag -l "$version") ]; then
             echo "Dev tag exists, deleting..."
             git tag -d $version
-            git push origin $version
+            git push --delete origin $version
             gh release delete dev -y
           fi
           echo "Creating and pushing dev tag"
