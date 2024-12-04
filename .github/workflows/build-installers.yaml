@@ -9,7 +9,7 @@ on:
       - '**'
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
 permissions:
@@ -262,7 +262,13 @@ jobs:
         run: |
           unset IS_LATEST
 
-          if [ "$GITHUB_REF" == "refs/tags/dev" ]; then IS_LATEST='false' ; IS_PRERELEASE='true' ; else IS_LATEST='true'; IS_PRERELEASE='false'; fi
+          if [ "$GITHUB_REF" == "refs/tags/dev" ]; then
+            IS_LATEST='false'
+            IS_PRERELEASE='true'
+          else
+            IS_LATEST='true'
+            IS_PRERELEASE='false'
+          fi
 
           echo "IS_LATEST=${IS_LATEST}" >> "$GITHUB_OUTPUT"
           echo "IS_PRERELEASE=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
@@ -289,10 +295,6 @@ jobs:
         id: tag-name
         run: |
           echo "TAGNAME=$(echo $GITHUB_REF | cut -d / -f 3)" >>$GITHUB_OUTPUT
-
-      - name: Gets JWT Token from GitHub
-        if: github.ref != 'refs/tags/dev'
-        uses: Chia-Network/actions/github/jwt@main
 
       - name: Trigger apt repo update
         if: github.ref != 'refs/tags/dev'
