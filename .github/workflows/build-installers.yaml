@@ -255,9 +255,19 @@ jobs:
           echo "EXE_FILE=$EXE_FILE" >>$GITHUB_ENV
           echo "WEB_FILE=$WEB_FILE" >>$GITHUB_ENV
 
+      - name: Decide if release should be set as latest
+        id: is_latest
+        shell: bash
+        run: |
+          unset IS_LATEST
+
+          if [ "$GITHUB_REF" == "refs/tags/dev" ]; then IS_LATEST='false' ; else IS_LATEST='true'; fi
+          echo "IS_LATEST=${IS_LATEST}" >> "$GITHUB_OUTPUT"
+
       - name: Release
         uses: softprops/action-gh-release@v0.1.15
         with:
+          make_latest: ${{steps.is_latest.outputs.IS_LATEST}}
           files: |
             ${{ env.DMG_FILE }}
             ${{ env.DEB_FILE }}
