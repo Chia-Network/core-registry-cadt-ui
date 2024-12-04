@@ -51,3 +51,5 @@ jobs:
           echo "Creating and pushing dev tag"
           git tag $version -m "Release $version"
           git push origin $version
+          echo "Here's the release list at the end of this job:"
+          gh release list
