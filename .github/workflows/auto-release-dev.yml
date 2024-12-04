@@ -45,12 +45,7 @@ jobs:
             git push --delete origin $version
             echo "Release List"
             gh release list
-            if (gh release view dev | grep -q "release not found"); then
-              echo "dev release not found, continuing"
-            else
-              echo "dev release found, deleting...."
-              gh release delete dev -y
-            fi
+            gh release delete dev -y || true
           fi
           echo "Creating and pushing dev tag"
           git tag $version -m "Release $version"
