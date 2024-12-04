@@ -266,7 +266,7 @@ jobs:
           echo "IS_LATEST=${IS_LATEST}" >> "$GITHUB_OUTPUT"
 
       - name: Release
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2.1.0
         with:
           make_latest: ${{steps.is_latest.outputs.IS_LATEST}}
           files: |
