@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - develop
+      - dev-releases
 
 concurrency:
   group: dev-release-check
