@@ -6,6 +6,7 @@ on:
       - '**'
     branches:
       - develop
+      - dev-releases
   pull_request:
     branches:
       - '**'
@@ -268,19 +269,23 @@ jobs:
             ${{ env.WEB_FILE }}
 
       - name: Get repo name
+        if: !startsWith(github.ref, 'refs/tags/dev')
         id: repo-name
         run: |
           echo "REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d "/" -f 2)" >>$GITHUB_OUTPUT
 
       - name: Get tag name
+        if: !startsWith(github.ref, 'refs/tags/dev')
         id: tag-name
         run: |
           echo "TAGNAME=$(echo $GITHUB_REF | cut -d / -f 3)" >>$GITHUB_OUTPUT
 
       - name: Gets JWT Token from GitHub
+        if: !startsWith(github.ref, 'refs/tags/dev')
         uses: Chia-Network/actions/github/jwt@main
 
       - name: Trigger apt repo update
+        if: !startsWith(github.ref, 'refs/tags/dev')
         uses: Chia-Network/actions/github/glue@main
         with:
           json_data: '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"${{ env.APP_NAME }}\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"available"}'

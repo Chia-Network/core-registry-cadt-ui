@@ -37,6 +37,11 @@ jobs:
           version='dev'
           echo "Version is: $version"
 
+          if [ $(git tag -l "$version") ]; then
+            echo "Dev tag exists, deleting..."
+            git tag -d $version
+            gh release delete dev -y
+          fi
           echo "Creating and pushing dev tag"
           git tag $version -m "Release $version"
           git push origin $version
