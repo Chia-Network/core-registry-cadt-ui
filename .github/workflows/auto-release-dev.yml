@@ -45,6 +45,7 @@ jobs:
             git push --delete origin $version
             echo "Release List"
             gh release list
+            echo "Attempting to delete dev release..."
             gh release delete dev -y || true
           fi
           echo "Creating and pushing dev tag"
