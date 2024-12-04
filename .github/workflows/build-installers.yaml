@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - '**'
-    branches:
-      - develop
-      - dev-releases
   pull_request:
     branches:
       - '**'
@@ -60,7 +57,7 @@ jobs:
           SIGNING_SECRET: "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}"
 
       - name: Import Apple installer signing certificate
-        if: steps.check_secrets.outputs.HAS_SIGNING_SECRET
+        if: steps.check_secrets.outputs.HAS_SIGNING_SECRET && startsWith(github.ref, 'refs/tags/')
         uses: Apple-Actions/import-codesign-certs@v1
         with:
           p12-file-base64: ${{ secrets.APPLE_DEV_ID_APP }}
@@ -72,7 +69,7 @@ jobs:
         run: npm run electron:package:mac
 
       - name: Notarize
-        if: steps.check_secrets.outputs.HAS_SIGNING_SECRET
+        if: steps.check_secrets.outputs.HAS_SIGNING_SECRET && startsWith(github.ref, 'refs/tags/')
         run: |
           DMG_FILE=$(find ${{ github.workspace }}/dist/ -type f -name '*.dmg')
           xcrun notarytool submit \
