@@ -255,6 +255,7 @@ jobs:
           echo "EXE_FILE=$EXE_FILE" >>$GITHUB_ENV
           echo "WEB_FILE=$WEB_FILE" >>$GITHUB_ENV
 
+      # Dev release should not be set as latest
       - name: Decide if release should be set as latest
         id: is_latest
         shell: bash
