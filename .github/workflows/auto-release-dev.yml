@@ -36,26 +36,57 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          version=$(gh release list --limit 1 --order desc --exclude-pre-releases --json tagName --jq ".[].tagName")
-          echo "Latest release is $version"
-          gh release list --json tagName --jq ".[] | select(.tagName | test(\"${version}-rc*\")) | .tagName"
+          stable_version=$(gh release list --limit 1 --order desc --exclude-pre-releases --json tagName --jq ".[].tagName")
+          echo "Latest release is $stable_version"
+          rc_version='none'
+          rc_version=$(gh release list --json tagName --jq ".[] | select(.tagName | test(\"${version}-rc*\")) | .tagName")
           echo "Latest release candidate is $rc_version"
 
+          if [ ${rc_version} == "none" ]; then
+            # Extract the major, minor, and patch versions
+            IFS='.' read -r major minor patch <<< "$stable_version"
 
-          version='dev'
-          echo "Version is: $version"
+            # Increment the patch version
+            new_patch=$((patch + 1))
 
-          if [ $(git tag -l "$version") ]; then
-            echo "Dev tag exists, deleting..."
-            git tag -d $version
-            git push --delete origin $version
-            echo "Release List"
-            gh release list
-            echo "Attempting to delete dev release..."
-            gh release delete dev -y || true
+            # Construct the new version string
+            version="$major.$minor.$new_patch-rc1"
+
+            echo "New version: $version"
+
+          else
+            # Extract the major, minor, patch, and rc parts
+            IFS='.-' read -r major minor patch rc <<< "$rc_version"
+
+            # Extract just the number of the rc
+            rc_number="${rc#rc}"
+
+            # Construct the new version string
+            version="$major.$minor.$patch-rc$rc_number"
+
+            echo "New version: $version"
+
           fi
-          echo "Creating and pushing dev tag"
-          git tag $version -m "Release $version"
+
+          echo "Tag does not exist. Creating and pushing tag"
+          rm -f CHANGELOG.md
+          npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 0
+          changes=$(npx conventional-changelog-cli -r 1 | tail -n +2)
+          git tag $version -m "Release $version  $changes"
           git push origin $version
-          echo "Here's the release list at the end of this job:"
-          gh release list
+
+
+          # if [ $(git tag -l "$version") ]; then
+          #   echo "Dev tag exists, deleting..."
+          #   git tag -d $version
+          #   git push --delete origin $version
+          #   echo "Release List"
+          #   gh release list
+          #   echo "Attempting to delete dev release..."
+          #   gh release delete dev -y || true
+          # fi
+          # echo "Creating and pushing dev tag"
+          # git tag $version -m "Release $version"
+          # git push origin $version
+          # echo "Here's the release list at the end of this job:"
+          # gh release list

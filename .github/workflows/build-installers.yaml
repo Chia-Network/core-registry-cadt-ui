@@ -285,22 +285,22 @@ jobs:
             ${{ env.WEB_FILE }}
 
       - name: Get repo name
-        if: github.ref != 'refs/tags/dev'
+        if: github.ref != 'refs/tags/*-rc*'
         id: repo-name
         run: |
           echo "REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d "/" -f 2)" >>$GITHUB_OUTPUT
 
       - name: Get tag name
-        if: github.ref != 'refs/tags/dev'
+        if: github.ref != 'refs/tags/*-rc*'
         id: tag-name
         run: |
           echo "TAGNAME=$(echo $GITHUB_REF | cut -d / -f 3)" >>$GITHUB_OUTPUT
 
-      - name: Trigger apt repo update
-        if: github.ref != 'refs/tags/dev'
-        uses: Chia-Network/actions/github/glue@main
-        with:
-          json_data: '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"${{ env.APP_NAME }}\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"available"}'
-          glue_url: ${{ secrets.GLUE_API_URL }}
-          glue_project: "climate-tokenization"
-          glue_path: "trigger"
+      # - name: Trigger apt repo update
+      #   if: github.ref != 'refs/tags/*-rc*'
+      #   uses: Chia-Network/actions/github/glue@main
+      #   with:
+      #     json_data: '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"${{ env.APP_NAME }}\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"available"}'
+      #     glue_url: ${{ secrets.GLUE_API_URL }}
+      #     glue_project: "climate-tokenization"
+      #     glue_path: "trigger"
