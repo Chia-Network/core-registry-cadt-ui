@@ -38,11 +38,10 @@ jobs:
         run: |
           stable_version=$(gh release list --limit 1 --order desc --exclude-pre-releases --json tagName --jq ".[].tagName")
           echo "Latest release is $stable_version"
-          rc_version='none'
           rc_version=$(gh release list --json tagName --jq ".[] | select(.tagName | test(\"${version}-rc*\")) | .tagName")
           echo "Latest release candidate is $rc_version"
 
-          if [ ${rc_version} == "none" ]; then
+          if [[ -z ${rc_version} ]]; then
             # Extract the major, minor, and patch versions
             IFS='.' read -r major minor patch <<< "$stable_version"
 
