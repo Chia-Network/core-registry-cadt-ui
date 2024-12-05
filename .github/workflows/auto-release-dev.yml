@@ -60,6 +60,9 @@ jobs:
             # Extract just the number of the rc
             rc_number="${rc#rc}"
 
+            # Increment the rc number
+            rc_number=$((rc_number +1))
+
             # Construct the new version string
             version="$major.$minor.$patch-rc$rc_number"
 
