@@ -40,6 +40,15 @@ jobs:
       - name: install dmg-license
         run: npm i dmg-license
 
+      - name: Change the package.json version if an RC tag
+        if: startsWith(github.ref, 'refs/tags/') && contains( github.ref, '-rc')
+        run: |
+          IFS='/' read -r base directory tag <<< "$github.ref"
+
+          jq ".version = \"${tag}\"" package.json
+
+          cat package.json
+
       - name: npm install
         run: |
           npm install
@@ -102,6 +111,15 @@ jobs:
       - name: Ignore Husky where not compatible
         run: npm pkg delete scripts.prepare
 
+      - name: Change the package.json version if an RC tag
+        if: startsWith(github.ref, 'refs/tags/') && contains( github.ref, '-rc')
+        run: |
+          IFS='/' read -r base directory tag <<< "$github.ref"
+
+          jq ".version = \"${tag}\"" package.json
+
+          cat package.json
+
       - name: npm install
         run: |
           node --version
@@ -160,6 +178,15 @@ jobs:
       - name: Install Husky
         run: npm install --save-dev husky
 
+      - name: Change the package.json version if an RC tag
+        if: startsWith(github.ref, 'refs/tags/') && contains( github.ref, '-rc')
+        run: |
+          IFS='/' read -r base directory tag <<< "$github.ref"
+
+          jq ".version = \"${tag}\"" package.json
+
+          cat package.json
+
       - name: npm install
         run: |
           node --version
@@ -194,6 +221,15 @@ jobs:
 
       - name: Install Husky
         run: npm install --save-dev husky
+
+      - name: Change the package.json version if an RC tag
+        if: startsWith(github.ref, 'refs/tags/') && contains( github.ref, '-rc')
+        run: |
+          IFS='/' read -r base directory tag <<< "$github.ref"
+
+          jq ".version = \"${tag}\"" package.json
+
+          cat package.json
 
       - name: npm install and build
         run: |
@@ -263,9 +299,15 @@ jobs:
           unset IS_LATEST
 
           if [ "$GITHUB_REF" == "refs/tags/dev" ]; then
+            echo "dev tag matched"
+            IS_LATEST='false'
+            IS_PRERELEASE='true'
+          elif [ "$GITHUB_REF" =~ "refs/tags/*-rc*" ]; then
+            echo "release candidate tag matched"
             IS_LATEST='false'
             IS_PRERELEASE='true'
           else
+            echo "main branch release matched"
             IS_LATEST='true'
             IS_PRERELEASE='false'
           fi
@@ -285,19 +327,19 @@ jobs:
             ${{ env.WEB_FILE }}
 
       - name: Get repo name
-        if: github.ref != 'refs/tags/*-rc*'
+        if: startsWith(github.ref, 'refs/tags/') && !contains( github.ref, '-rc')
         id: repo-name
         run: |
           echo "REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d "/" -f 2)" >>$GITHUB_OUTPUT
 
       - name: Get tag name
-        if: github.ref != 'refs/tags/*-rc*'
+        if:  startsWith(github.ref, 'refs/tags/') && !contains( github.ref, '-rc')
         id: tag-name
         run: |
           echo "TAGNAME=$(echo $GITHUB_REF | cut -d / -f 3)" >>$GITHUB_OUTPUT
 
       # - name: Trigger apt repo update
-      #   if: github.ref != 'refs/tags/*-rc*'
+      #   if: startsWith(github.ref, 'refs/tags/') && !contains( github.ref, '-rc')
       #   uses: Chia-Network/actions/github/glue@main
       #   with:
       #     json_data: '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"${{ env.APP_NAME }}\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"available"}'
