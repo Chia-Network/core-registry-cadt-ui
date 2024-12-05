@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - develop
+      - dev-releases
 
 concurrency:
   group: dev-release-check
@@ -35,6 +36,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          version=$(gh release list --limit 1 --order desc --exclude-pre-releases --json tagName --jq -r .[].tagName)
+          echo "Latest release is $version"
+          rc_version=$(gh release list --json tagName --jq ".[] | select(.tagName | test("${version}-rc*")) | .tagName"
+          echo "Latest release candidate is $rc_version"
+
+
           version='dev'
           echo "Version is: $version"
 
