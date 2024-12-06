@@ -50,8 +50,6 @@ jobs:
           jq ".version = \"${tag}\"" package.json > package.tmp
           mv package.tmp package.json
 
-          cat package.json
-
       - name: npm install
         run: |
           npm install
@@ -123,8 +121,6 @@ jobs:
           jq ".version = \"${tag}\"" package.json > package.tmp
           mv package.tmp package.json
 
-          cat package.json
-
       - name: npm install
         run: |
           node --version
@@ -191,8 +187,6 @@ jobs:
           jq ".version = \"${tag}\"" package.json > package.tmp
           mv package.tmp package.json
 
-          cat package.json
-
       - name: npm install
         run: |
           node --version
@@ -235,8 +229,6 @@ jobs:
 
           jq ".version = \"${tag}\"" package.json > package.tmp
           mv package.tmp package.json
-
-          cat package.json
 
       - name: npm install and build
         run: |
