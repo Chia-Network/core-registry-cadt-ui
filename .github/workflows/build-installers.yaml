@@ -43,9 +43,11 @@ jobs:
       - name: Change the package.json version if an RC tag
         if: startsWith(github.ref, 'refs/tags/') && contains( github.ref, '-rc')
         run: |
+          echo "Github ref: $github.ref"
           IFS='/' read -r base directory tag <<< "$github.ref"
+          echo "Extracted tag is $tag"
 
-          jq ".version = \"${tag}\"" package.json
+          jq ".version = \"${tag}\"" package.json > package.json
 
           cat package.json
 
@@ -117,7 +119,7 @@ jobs:
         run: |
           IFS='/' read -r base directory tag <<< "$github.ref"
 
-          jq ".version = \"${tag}\"" package.json
+          jq ".version = \"${tag}\"" package.json > package.json
 
           cat package.json
 
@@ -184,7 +186,7 @@ jobs:
         run: |
           IFS='/' read -r base directory tag <<< "$github.ref"
 
-          jq ".version = \"${tag}\"" package.json
+          jq ".version = \"${tag}\"" package.json > package.json
 
           cat package.json
 
@@ -228,7 +230,7 @@ jobs:
         run: |
           IFS='/' read -r base directory tag <<< "$github.ref"
 
-          jq ".version = \"${tag}\"" package.json
+          jq ".version = \"${tag}\"" package.json > package.json
 
           cat package.json
 
