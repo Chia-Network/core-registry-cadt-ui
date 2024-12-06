@@ -1,6 +1,6 @@
 # Compares the version in package.json to tags on the repo. If the tag doesn't exist, a new tag is created, which
 # then triggers the normal "on tag" release automation in the build job
-name: Auto Tag Dev
+name: Auto Tag RC
 
 on:
   push:
@@ -9,11 +9,11 @@ on:
       - dev-releases
 
 concurrency:
-  group: dev-release-check
+  group: rc-release-check
 
 jobs:
   release-dev:
-    name: Release dev version
+    name: Release rc version
     runs-on: ubuntu-latest
     steps:
       - name: Clean workspace
@@ -81,19 +81,3 @@ jobs:
           changes=$(npx conventional-changelog-cli -r 1 | tail -n +2)
           git tag $version -m "Release $version  $changes"
           git push origin $version
-
-
-          # if [ $(git tag -l "$version") ]; then
-          #   echo "Dev tag exists, deleting..."
-          #   git tag -d $version
-          #   git push --delete origin $version
-          #   echo "Release List"
-          #   gh release list
-          #   echo "Attempting to delete dev release..."
-          #   gh release delete dev -y || true
-          # fi
-          # echo "Creating and pushing dev tag"
-          # git tag $version -m "Release $version"
-          # git push origin $version
-          # echo "Here's the release list at the end of this job:"
-          # gh release list
