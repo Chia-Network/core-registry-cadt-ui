@@ -335,11 +335,11 @@ jobs:
         run: |
           echo "TAGNAME=$(echo $GITHUB_REF | cut -d / -f 3)" >>$GITHUB_OUTPUT
 
-      # - name: Trigger apt repo update
-      #   if: startsWith(github.ref, 'refs/tags/') && !contains( github.ref, '-rc')
-      #   uses: Chia-Network/actions/github/glue@main
-      #   with:
-      #     json_data: '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"${{ env.APP_NAME }}\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"available"}'
-      #     glue_url: ${{ secrets.GLUE_API_URL }}
-      #     glue_project: "climate-tokenization"
-      #     glue_path: "trigger"
+      - name: Trigger apt repo update
+        if: startsWith(github.ref, 'refs/tags/') && !contains( github.ref, '-rc')
+        uses: Chia-Network/actions/github/glue@main
+        with:
+          json_data: '{"climate_tokenization_repo":"${{ steps.repo-name.outputs.REPO_NAME }}","application_name":"[\"${{ env.APP_NAME }}\"]","release_version":"${{ steps.tag-name.outputs.TAGNAME }}","add_debian_version":"true","arm64":"available"}'
+          glue_url: ${{ secrets.GLUE_API_URL }}
+          glue_project: "climate-tokenization"
+          glue_path: "trigger"
