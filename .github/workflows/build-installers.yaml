@@ -299,11 +299,7 @@ jobs:
 
           echo "Github ref is $GITHUB_REF"
 
-          if [[ "$GITHUB_REF" == "refs/tags/dev" ]]; then
-            echo "dev tag matched"
-            IS_LATEST='false'
-            IS_PRERELEASE='true'
-          elif [[ "$GITHUB_REF" =~ "-rc" ]]; then
+          if [[ "$GITHUB_REF" =~ "-rc" ]]; then
             echo "release candidate tag matched"
             IS_LATEST='false'
             IS_PRERELEASE='true'
