@@ -9,7 +9,12 @@ interface GetOrgnaizationsMapResponse {
 
 interface CreateOrganizationResponse {
   message: string;
-  orgId: string;
+  orgUid: string;
+}
+
+interface CreateOrganizationParams {
+  orgUid: string;
+  isHome: boolean;
 }
 
 export interface CreateOrganizatonParams {
@@ -65,22 +70,20 @@ const organizationsApi = cadtApi.injectEndpoints({
       invalidatesTags: [organizationsTag],
     }),
 
-    importOrganization: builder.mutation<CreateOrganizationResponse, string>({
-      query: (orgUid: string) => ({
+    importOrganization: builder.mutation<CreateOrganizationResponse, CreateOrganizationParams>({
+      query: (createOrgParams) => ({
         url: `/v1/organizations`,
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: { orgUid },
+        body: createOrgParams,
       }),
       invalidatesTags: [organizationsTag],
     }),
 
     deleteOrganization: builder.mutation<any, string>({
       query: (orgUid: string) => ({
-        url: `/v1/organizations`,
+        url: `/v1/organizations/${orgUid}`,
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: { orgUid },
       }),
       invalidatesTags: [organizationsTag],
     }),
