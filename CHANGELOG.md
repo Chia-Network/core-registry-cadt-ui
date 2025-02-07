@@ -1,3 +1,45 @@
+## [2.0.2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc9...2.0.2) (2025-02-07)
+
+
+
+## [2.0.1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.0...2.0.1) (2024-11-20)
+
+
+
+# [2.0.0](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.11...2.0.0) (2024-11-14)
+
+
+### Bug Fixes
+
+* address breaking changes in flowbite date picker ([776d8b1](https://github.com/Chia-Network/core-registry-cadt-ui/commit/776d8b156fd26500d5f4f5fb187039334c40d342))
+* connect form address field to accept v4 ips ([1dfb557](https://github.com/Chia-Network/core-registry-cadt-ui/commit/1dfb55715fd675fc586eaa4feacbbbc2777a84f6))
+* locked in flowbite-react version ([d0987f9](https://github.com/Chia-Network/core-registry-cadt-ui/commit/d0987f9aa1e041452897173a34f0d4c1c4ff1762))
+* ts errors ([54613b2](https://github.com/Chia-Network/core-registry-cadt-ui/commit/54613b2fc790620294675198c9cb433ad51ad4b4))
+
+
+### Features
+
+* removed unnecessary express server for renderer to load ui ([3ac3de9](https://github.com/Chia-Network/core-registry-cadt-ui/commit/3ac3de94967d60df1245cea119d6a03a7f857d54))
+* updated organization import form for api changes ([e68a073](https://github.com/Chia-Network/core-registry-cadt-ui/commit/e68a073a0ec4a06fb80665783227f0e76b07de25))
+
+
+
+## [2.0.2-rc4](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc3...2.0.2-rc4) (2024-12-16)
+
+
+
+## [2.0.2-rc3](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc2...2.0.2-rc3) (2024-12-10)
+
+
+
+## [2.0.2-rc2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc1...2.0.2-rc2) (2024-12-06)
+
+
+
+## [2.0.2-rc1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.1...2.0.2-rc1) (2024-12-06)
+
+
+
 ## [2.0.1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.0...2.0.1) (2024-11-20)
 
 
