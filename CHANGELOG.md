@@ -1,3 +1,30 @@
+## [2.0.3](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.3-rc6...2.0.3) (2025-06-25)
+
+
+
+## [2.0.2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc9...2.0.2) (2025-02-07)
+
+
+
+## [2.0.1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.0...2.0.1) (2024-11-20)
+
+
+
+# [2.0.0](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.11...2.0.0) (2024-11-14)
+
+
+### Bug Fixes
+
+* address type mismatch ([5467fa5](https://github.com/Chia-Network/core-registry-cadt-ui/commit/5467fa5207e1cae62f96ae574e8e5a724d0aeca0))
+* address type mismatch ([2779480](https://github.com/Chia-Network/core-registry-cadt-ui/commit/2779480a4ab815f61e780eba876e0f2918d4f8df))
+
+
+### Features
+
+* add validation for org prefix ([8724b77](https://github.com/Chia-Network/core-registry-cadt-ui/commit/8724b77cd19eafcff90f26b8687105a0696a053c))
+
+
+
 ## [2.0.2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc9...2.0.2) (2025-02-07)
 
 
