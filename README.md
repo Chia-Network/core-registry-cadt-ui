@@ -52,9 +52,9 @@ sudo apt-get install cadt-ui
 
 ### Web Application
 
-The CADT UI can be hosted as a web application, either for internal use, or made available to the public.  
+The CADT UI can be hosted as a web application, either for internal use, or made available to the public.
 When operating as a web application, the user's browser must be able to connect to
-the [Core Registry CADT API](https://github.com/Chia-Network/Core-Registry-CADT).  
+the [Core Registry CADT API](https://github.com/Chia-Network/Core-Registry-CADT).
 This means the API must be available on the public internet if the UI is public. The `READ_ONLY` option on the API
 should be set when running a public observer node.
 
@@ -154,3 +154,8 @@ this is written in the present-imperative tense.
 
 Each time you commit the message will be checked against these standards in a pre-commit hook. Additionally all the
 commits in a PR branch will be linted before it can be merged to master.
+
+## Attribution
+
+* [Document Object Model](https://www.w3.org/TR/DOM-Requirements/) by [W3C](https://www.w3.org/) licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
+* [caniuselite](https://github.com/browserslist/caniuse-lite) by [Browserlist](https://browsersl.ist/) licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)

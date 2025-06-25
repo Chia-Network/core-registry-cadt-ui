@@ -18,7 +18,11 @@ const CreateOrganizationForm: React.FC<FormProps> = ({ onSubmit }) => {
 
   const validationSchema = yup.object({
     name: yup.string().required(intl.formatMessage({ id: 'name-is-required' })),
-    prefix: yup.string().required(intl.formatMessage({ id: 'prefix-is-required' })),
+    prefix: yup
+      .string()
+      .optional()
+      .matches(/^[a-zA-Z0-9]+$/, 'Prefix must contain only alphanumeric characters (a-z, A-Z, 0-9)')
+      .max(20, 'Prefix must be 20 characters or less'),
   });
 
   const handleSubmit = useCallback(
@@ -58,9 +62,10 @@ const CreateOrganizationForm: React.FC<FormProps> = ({ onSubmit }) => {
                 <FloatingLabel
                   id="prefix"
                   label={intl.formatMessage({ id: 'organization-prefix' })}
-                  color={(errors.name && touched.name && 'error') || undefined}
+                  color={(errors.prefix && touched.prefix && 'error') || undefined}
                   variant="outlined"
                   type="text"
+                  maxLength={20}
                   {...field}
                 />
               )}
