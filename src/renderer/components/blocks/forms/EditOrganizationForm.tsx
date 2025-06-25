@@ -88,9 +88,7 @@ const EditOrganizationForm: React.FC<FormProps> = ({ myOrganization, onSubmit, o
                 </div>
               )}
             </Field>
-            {touched.prefix && (
-              <ErrorMessage name="prefix" component="div" className="text-red-600" />
-            )}
+            {touched.prefix && <ErrorMessage name="prefix" component="div" className="text-red-600" />}
             <div className="flex justify-start">
               <p className="font-bold text-left text-gray-700 dark:text-gray-400 mr-4">
                 <FormattedMessage id="orguid" />

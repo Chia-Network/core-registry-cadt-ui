@@ -21,10 +21,7 @@ const CreateOrganizationForm: React.FC<FormProps> = ({ onSubmit }) => {
     prefix: yup
       .string()
       .optional()
-      .matches(
-        /^[a-zA-Z0-9]+$/,
-        'Prefix must contain only alphanumeric characters (a-z, A-Z, 0-9)'
-      )
+      .matches(/^[a-zA-Z0-9]+$/, 'Prefix must contain only alphanumeric characters (a-z, A-Z, 0-9)')
       .max(20, 'Prefix must be 20 characters or less'),
   });
 
