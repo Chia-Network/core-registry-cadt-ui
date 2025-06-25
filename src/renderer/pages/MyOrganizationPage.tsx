@@ -27,9 +27,9 @@ const MyOrganizationPage: React.FC<MyOrganizationProps> = () => {
     }
   }, [myOrganization, navigate, organizationsListLoading]);
 
-  const handleSubmitEditOrganization = async (orgName: string) => {
+  const handleSubmitEditOrganization = async (values: { organizationName: string; prefix: string }) => {
     if (myOrganization) {
-      await triggerEditOrganization({ orgName, orgUid: myOrganization?.orgUid });
+      await triggerEditOrganization({ orgName: values.organizationName, orgUid: myOrganization?.orgUid });
     }
   };
 
