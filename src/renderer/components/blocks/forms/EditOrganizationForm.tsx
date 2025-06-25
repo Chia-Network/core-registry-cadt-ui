@@ -7,18 +7,23 @@ import { Organization } from '@/schemas/Organization.schema';
 
 const validationSchema = yup.object({
   organizationName: yup.string().required('The organization name must be at least 3 characters').min(3),
+  prefix: yup
+    .string()
+    .optional()
+    .matches(/^[a-zA-Z0-9]+$/, 'Prefix must contain only alphanumeric characters (a-z, A-Z, 0-9)')
+    .max(20, 'Prefix must be 20 characters or less'),
 });
 
 interface FormProps {
   myOrganization: Organization;
-  onSubmit: (organizationName: string) => Promise<any>;
+  onSubmit: (values: { organizationName: string; prefix: string }) => Promise<any>;
   onCancel: () => void;
 }
 
 const EditOrganizationForm: React.FC<FormProps> = ({ myOrganization, onSubmit, onCancel }: FormProps) => {
   const handleSubmit = useCallback(
-    async (values: { organizationName: string }, { setSubmitting }) => {
-      await onSubmit(values.organizationName);
+    async (values: { organizationName: string; prefix: string }, { setSubmitting }) => {
+      await onSubmit(values);
       setSubmitting(false);
     },
     [onSubmit],
@@ -30,7 +35,7 @@ const EditOrganizationForm: React.FC<FormProps> = ({ myOrganization, onSubmit, o
 
   return (
     <Formik
-      initialValues={{ organizationName: myOrganization.name }}
+      initialValues={{ organizationName: myOrganization.name, prefix: myOrganization.prefix }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -60,6 +65,31 @@ const EditOrganizationForm: React.FC<FormProps> = ({ myOrganization, onSubmit, o
             </Field>
             {touched.organizationName && (
               <ErrorMessage name="organizationName" component="div" className="text-red-600" />
+            )}
+            <Field name="prefix">
+              {({ field }) => (
+                <div className="flex justify-start align-middle">
+                  <div>
+                    <p className="font-bold text-left text-gray-700 dark:text-gray-400 mr-4">
+                      <FormattedMessage id="organization-prefix" />
+                    </p>
+                  </div>
+                  <TextInput
+                    className="w-3/5 mb-2"
+                    id="prefix"
+                    color={errors.prefix && touched.prefix && 'failure'}
+                    variant="outlined"
+                    required
+                    type="text"
+                    maxLength={20}
+                    {...field}
+                    onChange={(event) => handleChange(event, field)}
+                  />
+                </div>
+              )}
+            </Field>
+            {touched.prefix && (
+              <ErrorMessage name="prefix" component="div" className="text-red-600" />
             )}
             <div className="flex justify-start">
               <p className="font-bold text-left text-gray-700 dark:text-gray-400 mr-4">
