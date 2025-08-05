@@ -1,3 +1,23 @@
+## [2.0.4](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.4-rc2...2.0.4) (2025-08-05)
+
+
+
+## [2.0.3](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.3-rc6...2.0.3) (2025-06-25)
+
+
+
+## [2.0.2](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.2-rc9...2.0.2) (2025-02-07)
+
+
+
+## [2.0.1](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.0...2.0.1) (2024-11-20)
+
+
+
+# [2.0.0](https://github.com/Chia-Network/core-registry-cadt-ui/compare/1.3.11...2.0.0) (2024-11-14)
+
+
+
 ## [2.0.3](https://github.com/Chia-Network/core-registry-cadt-ui/compare/2.0.3-rc6...2.0.3) (2025-06-25)
 
 
