@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { resetApiHost } from '@/store/slices/app';
 import { reloadApplication } from '@/utils/unified-ui-utils';
+import { cadtApi } from '@/api/cadt/v1';
 
 const ConnectButton: React.FC = () => {
   const location = useLocation();
@@ -33,6 +34,13 @@ const ConnectButton: React.FC = () => {
 
   const handleDisconnect = () => {
     dispatch(resetApiHost());
+    // Clear persisted storage to prevent auto-reconnection
+    localStorage.removeItem('persist:app');
+    sessionStorage.removeItem('persist:app');
+
+    // Clear RTK Query cache to force fresh health check
+    dispatch(cadtApi.util.resetApiState());
+
     setTimeout(() => reloadApplication(), 0);
   };
 
