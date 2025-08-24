@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getAppVersion } from './version.js';
 
 // Manually define __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +26,18 @@ function createWindow() {
     // load app from packaged static html
     const indexPath = path.join(__dirname, 'renderer', 'index.html');
     console.log('Loading file:', indexPath); // Log to confirm the correct path
+
+    // Add version header to all requests in production
+    const appVersion = getAppVersion();
+    win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        responseHeaders: {
+          ...details.responseHeaders,
+          'X-CADT-Version': [appVersion],
+        },
+      });
+    });
+
     win.loadFile(indexPath).catch((err) => {
       console.error('Failed to load index.html:', err);
     });

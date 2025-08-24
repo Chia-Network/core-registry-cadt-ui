@@ -1,10 +1,16 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import path from 'path';
 import { execSync } from 'child_process';
 import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-function getAppVersion() {
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+/**
+ * Get the application version from git tags or package.json
+ */
+export function getAppVersion() {
   try {
     // First, try to get the current git tag
     try {
@@ -21,7 +27,7 @@ function getAppVersion() {
     }
 
     // Read package.json to get the version
-    const packageJsonPath = path.join(__dirname, 'package.json');
+    const packageJsonPath = join(__dirname, '../package.json');
     const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
     const packageVersion = packageJson.version;
 
@@ -34,27 +40,14 @@ function getAppVersion() {
     return `${packageVersion}-${commitSha}`;
   } catch (error) {
     console.warn('Failed to determine app version:', error.message);
-    return 'unknown';
+
+    // Last resort: just return package.json version
+    try {
+      const packageJsonPath = join(__dirname, '../package.json');
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+      return packageJson.version;
+    } catch (fallbackError) {
+      return 'unknown';
+    }
   }
 }
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  base: './',
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src/renderer'),
-    },
-  },
-  build: {
-    // Specify the directory to output the build files
-    outDir: path.resolve(__dirname, 'build/renderer'),
-  },
-  server: {
-    port: 5175,
-  },
-  define: {
-    __APP_VERSION__: JSON.stringify(getAppVersion()),
-  },
-});
